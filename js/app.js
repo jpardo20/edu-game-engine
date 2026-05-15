@@ -1,3 +1,102 @@
+function pintaMarcador() {
+    const elMarcador = elements.marcador;
+
+    if (!elMarcador) return;
+
+    elMarcador.innerHTML = equips.map(equip => {
+        const isActive = equip === equips[equipActiu];
+        return `
+    <div class="score-row">
+
+  <div class="team-members-side">
+    ${equip.membresEq
+                .map(m => `${m.firstname} ${m.lastname}`)
+                .join("<hr>")}
+  </div>
+
+  <div class='score ${isActive ? "active" : ""}'>
+
+      <div class="score-header">
+        <span class="team-name" style="background:${equip.color}">
+          ${equip.nomEq}
+        </span>
+
+      </div>
+
+      <!-- VIRALITAT -->
+
+      <div class="metric">
+
+        <div class="metric-info">
+            <span 
+                class="metric-label viralitat tooltip"
+                data-tooltip="Mesura la capacitat del grup per captar atenció, generar impacte i influir dins les xarxes socials.">
+                Viralitat
+            </span>
+
+          <span class="value ${equip.barra1 < 0 ? "neg" : "pos"}">
+            ${equip.barra1}
+          </span>
+        </div>
+
+        <div class="bar">
+          <div
+            class="fill pop pos"
+            style="
+                width:${Math.max(0, equip.barra1) * 10}%">
+          </div>
+
+          <div
+            class="fill pop neg"
+            style="
+                width:${Math.max(0, -equip.barra1) * 10}%">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PENSAMENT CRÍTIC -->
+
+      <div class="metric">
+
+        <div class="metric-info">
+            <span 
+                class="metric-label crit tooltip"
+                data-tooltip="Mesura la capacitat del grup per detectar manipulacions, contrastar informació i prendre decisions reflexives.">
+                Pensament crític
+            </span>
+
+          <span class="value ${equip.barra2 < 0 ? "neg" : "pos"}">
+            ${equip.barra2}
+          </span>
+        </div>
+
+        <div class="bar">
+          <div
+            class="fill crit pos"
+            style="
+                width:${Math.max(0, equip.barra2) * 10}%">
+          </div>
+
+          <div
+            class="fill crit neg"
+                style="width:${Math.max(0, -equip.barra2) * 10}%">
+          </div>
+        </div>
+
+        <span class="pos" style="float:right; font-size:0.9rem;">
+          Casella ${equip.posicioTaulell}
+        </span>
+      </div>
+
+  </div>
+
+</div>
+`;
+    }).join("");
+}
+
+
 // ======================================================
 // LA BASSA DIGITAL
 // ------------------------------------------------------
@@ -57,7 +156,17 @@ const tipus = [
 // Nombre total de caselles del tauler.
 const qtatTotalDeCaselles = 36;
 
-
+const elements = {
+    taulell: document.getElementById("board"),
+    dau: document.getElementById("dice"),
+    marcador: document.getElementById("scores"),
+    torn: document.getElementById("turn"),
+    overlay: document.getElementById("overlay"),
+    choices: document.getElementById("choices"),
+    timer: document.getElementById("timer"),
+    setup: document.getElementById("setup"),
+    previewEquips: document.getElementById("teamsPreview")
+};
 
 // ======================================================
 // EVENTS DE BOTONS
@@ -294,7 +403,7 @@ function netejaSistema() {
     equipActiu = 0;
     quantitatDeTorns = 0;
 
-    document.getElementById("teamsPreview").innerHTML = "";
+    elements.previewEquips.innerHTML = "";
 
     hoPintaTot();
 }
@@ -325,9 +434,9 @@ function reiniciComplet() {
         equip.barra2 = 0;
     });
 
-    document.getElementById("setup").style.display = "flex";
+    elements.setup.style.display = "flex";
 
-    renderTeamsPreview();
+    pintaPreviewEquips();
 
     hoPintaTot();
 }
@@ -356,7 +465,7 @@ function resetGame() {
 
     hoPintaTot();
 
-    document.getElementById("setup").style.display = "none";
+    elements.setup.style.display = "none";
 }
 
 
@@ -370,7 +479,7 @@ function resetGame() {
 /**
  * Carrega preguntes.json.
  */
-async function loadQuestions() {
+async function carregaPreguntes() {
 
     const res = await fetch("./data/preguntes.json");
 
@@ -394,10 +503,7 @@ async function loadQuestions() {
  * - torn actiu
  */
 function hoPintaTot() {
-
-    const elTaulell = document.getElementById("board");
-
-    elTaulell.innerHTML = "";
+    elements.taulell.innerHTML = "";
 
     const filesTaulell = Math.ceil(taulell.length / columnesTaulell);
 
@@ -508,7 +614,7 @@ function hoPintaTot() {
             <div id='t${indexTaulell}'></div>
         `;
 
-        elTaulell.appendChild(div);
+        elements.taulell.appendChild(div);
     });
 
 
@@ -540,7 +646,7 @@ function hoPintaTot() {
     // TORN ACTIU
     // ==================================================
 
-    const elTorn = document.getElementById("turn");
+    const elTorn = elements.torn;
 
     if (elTorn) {
         elTorn.innerText = "Torn: " + equips[equipActiu].nomEq;
@@ -551,102 +657,8 @@ function hoPintaTot() {
     // ==================================================
     // MARCADOR
     // ==================================================
+    pintaMarcador()
 
-    const elMarcador = document.getElementById("scores");
-
-    if (!elMarcador) return;
-
-    elMarcador.innerHTML = equips.map(equip => {
-        const isActive = equip === equips[equipActiu];
-        return `
-    <div class="score-row">
-
-  <div class="team-members-side">
-    ${equip.membresEq
-                .map(m => `${m.firstname} ${m.lastname}`)
-                .join("<hr>")}
-  </div>
-
-  <div class='score ${isActive ? "active" : ""}'>
-
-      <div class="score-header">
-        <span class="team-name" style="background:${equip.color}">
-          ${equip.nomEq}
-        </span>
-
-      </div>
-
-      <!-- VIRALITAT -->
-
-      <div class="metric">
-
-        <div class="metric-info">
-            <span 
-                class="metric-label viralitat tooltip"
-                data-tooltip="Mesura la capacitat del grup per captar atenció, generar impacte i influir dins les xarxes socials.">
-                Viralitat
-            </span>
-
-          <span class="value ${equip.barra1 < 0 ? "neg" : "pos"}">
-            ${equip.barra1}
-          </span>
-        </div>
-
-        <div class="bar">
-          <div
-            class="fill pop pos"
-            style="
-                width:${Math.max(0, equip.barra1) * 10}%">
-          </div>
-
-          <div
-            class="fill pop neg"
-            style="
-                width:${Math.max(0, -equip.barra1) * 10}%">
-          </div>
-        </div>
-
-      </div>
-
-      <!-- PENSAMENT CRÍTIC -->
-
-      <div class="metric">
-
-        <div class="metric-info">
-            <span 
-                class="metric-label crit tooltip"
-                data-tooltip="Mesura la capacitat del grup per detectar manipulacions, contrastar informació i prendre decisions reflexives.">
-                Pensament crític
-            </span>
-
-          <span class="value ${equip.barra2 < 0 ? "neg" : "pos"}">
-            ${equip.barra2}
-          </span>
-        </div>
-
-        <div class="bar">
-          <div
-            class="fill crit pos"
-            style="
-                width:${Math.max(0, equip.barra2) * 10}%">
-          </div>
-
-          <div
-            class="fill crit neg"
-                style="width:${Math.max(0, -equip.barra2) * 10}%">
-          </div>
-        </div>
-
-        <span class="pos" style="float:right; font-size:0.9rem;">
-          Casella ${equip.posicioTaulell}
-        </span>
-      </div>
-
-  </div>
-
-</div>
-`;
-    }).join("");
 }
 
 
@@ -665,7 +677,7 @@ function rollDice() {
 
     const r = Math.floor(Math.random() * 6) + 1;
 
-    document.getElementById("dice").innerText = r;
+    elements.dau.innerText = r;
 
     const t = equips[equipActiu];
 
@@ -683,7 +695,7 @@ function rollDice() {
 /**
  * Gestiona l’event de la casella actual.
  */
-function event() {
+function gestionaEventCasella() {
 
     const t = equips[equipActiu];
 
@@ -693,7 +705,7 @@ function event() {
     // START
     if (type === "start") {
 
-        nextTurn();
+        seguentTorn();
 
         return;
     }
@@ -717,7 +729,7 @@ function event() {
 
         console.warn("Sense preguntes per:", type);
 
-        nextTurn();
+        seguentTorn();
 
         return;
     }
@@ -744,20 +756,10 @@ function event() {
  * - opcions
  */
 function showModal(data) {
-
-    const o = document.getElementById("overlay");
-
-    o.classList.add("show");
-
+    elements.overlay.classList.add("show");
     document.getElementById("title").innerText = data.title;
-
     document.getElementById("text").innerText = data.text;
-
-    const ch = document.getElementById("choices");
-
-    ch.innerHTML = "";
-
-
+    elements.choices.innerHTML = "";
     // Crear botons d’opcions
     data.choices.forEach(opt => {
 
@@ -781,7 +783,7 @@ function showModal(data) {
             t.barra2 += opt.barra2 || 0;
 
             // Tancar modal
-            o.classList.remove("show");
+            elements.overlay.classList.remove("show");
 
             clearInterval(interval);
 
@@ -795,10 +797,10 @@ function showModal(data) {
 
             guardaPartida();
 
-            nextTurn();
+            seguentTorn();
         };
 
-        ch.appendChild(b);
+        elements.choices.appendChild(b);
     });
 
     startTimer();
@@ -862,9 +864,8 @@ function startTimer() {
 
     let time = TEMPS_PER_DEFECTE;
 
-    const timerEl = document.getElementById("timer");
-
-    if (!timerEl) return;
+    
+    if (!elements.timer) return;
 
     clearInterval(interval);
 
@@ -877,24 +878,24 @@ function startTimer() {
         // Temps normal
         if (time > 5) {
 
-            timerEl.innerText =
+            elements.timer.innerText =
                 `${time}s → decidiu`;
 
-            timerEl.style.color = "orange";
+            elements.timer.style.color = "orange";
 
 
         // Temps crític
         } else if (time > 0) {
 
-            timerEl.innerText = `⚠️ ${time}s`;
+            elements.timer.innerText = `⚠️ ${time}s`;
 
-            timerEl.style.color = "red";
+            elements.timer.style.color = "red";
 
 
         // Temps esgotat
         } else {
 
-            timerEl.innerText =
+            elements.timer.innerText =
                 "Temps! Porta veu!";
 
             clearInterval(interval);
@@ -938,11 +939,11 @@ function unfair() {
 /**
  * Passa el torn al següent equip.
  */
-function nextTurn() {
+function seguentTorn() {
 
     equipActiu = (equipActiu + 1) % equips.length;
 
-    document.getElementById("dice").innerText = "🎲";
+    elements.dau.innerText = "🎲";
 
     hoPintaTot();
 
@@ -958,7 +959,7 @@ function nextTurn() {
  */
 function resetDice() {
 
-    const d = document.getElementById("dice");
+    const d = elements.dau;
 
     d.innerText = "🎲";
 
@@ -998,7 +999,7 @@ function moveStepByStep(equip, steps) {
             hoPintaTot();
 
             // Petit delay abans del modal
-            setTimeout(() => event(), 500);
+            setTimeout(() => gestionaEventCasella(), 500);
 
             return;
         }
@@ -1152,7 +1153,7 @@ function buildRandomTeams() {
     });
 
 
-    renderTeamsPreview();
+    pintaPreviewEquips();
 
     guardaEquips();
 }
@@ -1163,11 +1164,8 @@ function buildRandomTeams() {
  * Mostra els equips generats
  * a la pantalla inicial.
  */
-function renderTeamsPreview() {
-
-    const el = document.getElementById("teamsPreview");
-
-    el.innerHTML = equips.map(equip => `
+function pintaPreviewEquips() {
+    elements.previewEquips.innerHTML = equips.map(equip => `
         <div style="margin-bottom:10px">
             <strong style="color:${equip.color}">
                 ${equip.nomEq}
@@ -1187,7 +1185,7 @@ function renderTeamsPreview() {
  */
 function iniciaPartida() {
 
-    document.getElementById("setup")
+    elements.setup
         .style.display = "none";
 
     equipActiu = 0;
@@ -1220,7 +1218,7 @@ function iniciaPartida() {
  */
 async function init() {
 
-    await loadQuestions();
+    await carregaPreguntes();
 
     await carregaAlumnes();
 
@@ -1239,7 +1237,7 @@ async function init() {
 
         quantitatDeTorns = loadedGame.turns;
 
-        document.getElementById("setup")
+        elements.setup
             .style.display = "none";
 
         hoPintaTot();
@@ -1258,7 +1256,7 @@ async function init() {
 
         equips = loadedTeams;
 
-        renderTeamsPreview();
+        pintaPreviewEquips();
 
         return;
     }
