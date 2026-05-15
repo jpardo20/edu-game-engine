@@ -1,0 +1,326 @@
+{
+    "decisio": [
+        {
+            "title": "Notícia impactant",
+            "text": "Veieu una notícia molt bèstia sobre un company del centre. No sabeu si és certa, però ja s’està compartint molt.",
+            "choices": [
+                {
+                    "text": "La compartim perquè tothom ho està fent.",
+                    "pop": 3,
+                    "crit": -2
+                },
+                {
+                    "text": "No la compartim fins verificar-la.",
+                    "pop": -1,
+                    "crit": 3
+                },
+                {
+                    "text": "Fem broma sense compartir-la directament.",
+                    "pop": 1,
+                    "crit": -1
+                }
+            ]
+        },
+        {
+            "title": "El vídeo que enganxa",
+            "text": "Teniu un vídeo polèmic que us pot donar molta visibilitat, però sabeu que pot fer mal a algú.",
+            "choices": [
+                {
+                    "text": "El publiquem igualment.",
+                    "pop": 4,
+                    "crit": -3
+                },
+                {
+                    "text": "No el publiquem.",
+                    "pop": -1,
+                    "crit": 3
+                },
+                {
+                    "text": "El publiquem però sense noms.",
+                    "pop": 2,
+                    "crit": -2
+                }
+            ]
+        },
+        {
+            "title": "Comentari fàcil",
+            "text": "Algú penja una foto ridícula. Un comentari vostre podria fer riure molta gent.",
+            "choices": [
+                {
+                    "text": "Comentem per fer gràcia.",
+                    "pop": 3,
+                    "crit": -2
+                },
+                {
+                    "text": "No comentem.",
+                    "pop": -1,
+                    "crit": 2
+                },
+                {
+                    "text": "Avisem la persona per privat.",
+                    "pop": -1,
+                    "crit": 4
+                }
+            ]
+        },
+        {
+            "title": "Trend del moment",
+            "text": "Surt un repte viral. Tothom l’està fent, però és humiliant per qui perd.",
+            "choices": [
+                {
+                    "text": "Hi participem per no quedar fora.",
+                    "pop": 3,
+                    "crit": -2
+                },
+                {
+                    "text": "El qüestionem públicament.",
+                    "pop": -2,
+                    "crit": 4
+                },
+                {
+                    "text": "Mirem sense participar.",
+                    "pop": 0,
+                    "crit": -1
+                }
+            ]
+        }
+    ],
+    "algoritme": [
+        {
+            "title": "El sistema us empeny",
+            "text": "Durant aquest torn, l’algoritme només us mostra contingut que confirma el que ja penseu.",
+            "choices": [
+                {
+                    "text": "Ens ho creiem perquè encaixa amb nosaltres.",
+                    "pop": 2,
+                    "crit": -2
+                },
+                {
+                    "text": "Ho ignorem, però no ho qüestionem.",
+                    "pop": 0,
+                    "crit": 1
+                },
+                {
+                    "text": "Busquem una visió contrària abans d’opinar.",
+                    "pop": -1,
+                    "crit": 4
+                }
+            ]
+        },
+        {
+            "title": "Contingut extrem",
+            "text": "El sistema detecta que us quedeu més temps mirant conflictes. Ara us serveix contingut cada cop més radical.",
+            "choices": [
+                {
+                    "text": "Seguim mirant. És addictiu.",
+                    "pop": 3,
+                    "crit": -3
+                },
+                {
+                    "text": "Parem i ens preguntem per què ens ho mostra.",
+                    "pop": -1,
+                    "crit": 4
+                },
+                {
+                    "text": "Ho compartim al grup per comentar-ho.",
+                    "pop": 2,
+                    "crit": -1
+                }
+            ]
+        },
+        {
+            "title": "Cambra d’eco",
+            "text": "Totes les publicacions que veieu diuen el mateix. Sembla que tothom hi està d’acord.",
+            "choices": [
+                {
+                    "text": "Assumim que és veritat.",
+                    "pop": 2,
+                    "crit": -2
+                },
+                {
+                    "text": "Recordem que el nostre feed no és el món real.",
+                    "pop": 0,
+                    "crit": 4
+                },
+                {
+                    "text": "Fem una enquesta ràpida als altres grups.",
+                    "pop": 1,
+                    "crit": 2
+                }
+            ]
+        }
+    ],
+    "trampa": [
+        {
+            "title": "Per què t’apareix això?",
+            "text": "Us apareix un vídeo exactament sobre una inseguretat vostra. Per què creieu que us surt?",
+            "choices": [
+                {
+                    "text": "Perquè és casualitat.",
+                    "pop": 2,
+                    "crit": -3
+                },
+                {
+                    "text": "Perquè el sistema ha après què ens reté.",
+                    "pop": 0,
+                    "crit": 4
+                },
+                {
+                    "text": "Perquè és el vídeo més popular.",
+                    "pop": 2,
+                    "crit": -1
+                }
+            ]
+        },
+        {
+            "title": "Qui decideix què veus?",
+            "text": "Obriu una xarxa social per descansar cinc minuts. Mitja hora després encara hi sou.",
+            "choices": [
+                {
+                    "text": "Hem decidit nosaltres quedar-nos.",
+                    "pop": 1,
+                    "crit": -1
+                },
+                {
+                    "text": "El disseny també ens ha empès a quedar-nos.",
+                    "pop": 0,
+                    "crit": 3
+                },
+                {
+                    "text": "No passa res, només era entreteniment.",
+                    "pop": 2,
+                    "crit": -1
+                }
+            ]
+        },
+        {
+            "title": "Pregunta incòmoda",
+            "text": "Quan comparteixes una cosa sense pensar, qui està fent servir a qui?",
+            "choices": [
+                {
+                    "text": "Jo faig servir la xarxa.",
+                    "pop": 2,
+                    "crit": -1
+                },
+                {
+                    "text": "La xarxa també em fa servir a mi.",
+                    "pop": 0,
+                    "crit": 4
+                },
+                {
+                    "text": "Depèn de si tinc molts likes.",
+                    "pop": 3,
+                    "crit": -1
+                }
+            ]
+        }
+    ],
+    "pressio": [
+        {
+            "title": "Atac públic",
+            "text": "Un company és atacat públicament. Defensar-lo us pot fer perdre popularitat.",
+            "choices": [
+                {
+                    "text": "El defensem igualment.",
+                    "pop": -2,
+                    "crit": 4
+                },
+                {
+                    "text": "No fem res per no ficar-nos en problemes.",
+                    "pop": 2,
+                    "crit": -1
+                },
+                {
+                    "text": "Li escrivim en privat però públicament callem.",
+                    "pop": 0,
+                    "crit": 2
+                }
+            ]
+        },
+        {
+            "title": "El grup pressiona",
+            "text": "El vostre grup d’amics vol que us sumeu a una burla. Si no ho feu, us diran exagerats.",
+            "choices": [
+                {
+                    "text": "Ens hi sumem per no quedar fora.",
+                    "pop": 3,
+                    "crit": -3
+                },
+                {
+                    "text": "Diem que no i ho argumentem.",
+                    "pop": -2,
+                    "crit": 4
+                },
+                {
+                    "text": "Canviem de tema sense posicionar-nos.",
+                    "pop": 0,
+                    "crit": -1
+                }
+            ]
+        },
+        {
+            "title": "Captura privada",
+            "text": "Algú comparteix una captura d’una conversa privada. Tothom la vol veure.",
+            "choices": [
+                {
+                    "text": "La mirem i la reenviem.",
+                    "pop": 4,
+                    "crit": -4
+                },
+                {
+                    "text": "No la mirem i diem que no toca.",
+                    "pop": -2,
+                    "crit": 4
+                },
+                {
+                    "text": "La mirem però no la reenviem.",
+                    "pop": 1,
+                    "crit": -1
+                }
+            ]
+        }
+    ],
+    "viral": [
+        {
+            "title": "Us feu virals",
+            "text": "Un contingut vostre es dispara. L’algoritme us premia abans que pugueu pensar si era bona idea.",
+            "choices": [
+                {
+                    "text": "Acceptar l’impuls viral.",
+                    "pop": 4,
+                    "crit": -1
+                }
+            ]
+        },
+        {
+            "title": "Likes en cadena",
+            "text": "Tot el que feu ara té més abast. La visibilitat us dona poder, però també responsabilitat.",
+            "choices": [
+                {
+                    "text": "Aprofitar-ho per publicar més fort.",
+                    "pop": 3,
+                    "crit": -2
+                },
+                {
+                    "text": "Aprofitar-ho per enviar un missatge responsable.",
+                    "pop": 1,
+                    "crit": 3
+                }
+            ]
+        }
+    ],
+    "final": [
+        {
+            "title": "Final de la bassa",
+            "text": "Heu arribat al final. Però ara cal preguntar-se: qui ha sobreviscut millor? Qui ha estat més popular? Qui ha estat més lliure?",
+            "choices": [
+                {
+                    "text": "Tancar partida i veure resultats.",
+                    "pop": 0,
+                    "crit": 0,
+                    "finish": true
+                }
+            ]
+        }
+    ]
+}
