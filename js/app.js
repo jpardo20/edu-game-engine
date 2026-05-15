@@ -304,7 +304,7 @@ function netejaSistema() {
     equipActiu = 0;
     quantitatDeTorns = 0;
 
-    document.getElementById("teamsPreview").innerHTML = "";
+    elements.previewEquips.innerHTML = "";
 
     hoPintaTot();
 }
@@ -335,7 +335,7 @@ function reiniciComplet() {
         equip.barra2 = 0;
     });
 
-    document.getElementById("setup").style.display = "flex";
+    elements.setup.style.display = "flex";
 
     pintaPreviewEquips();
 
@@ -366,7 +366,7 @@ function resetGame() {
 
     hoPintaTot();
 
-    document.getElementById("setup").style.display = "none";
+    elements.setup.style.display = "none";
 }
 
 
@@ -404,10 +404,7 @@ async function carregaPreguntes() {
  * - torn actiu
  */
 function hoPintaTot() {
-
-    const elTaulell = document.getElementById("board");
-
-    elTaulell.innerHTML = "";
+    elements.taulell.innerHTML = "";
 
     const filesTaulell = Math.ceil(taulell.length / columnesTaulell);
 
@@ -518,7 +515,7 @@ function hoPintaTot() {
             <div id='t${indexTaulell}'></div>
         `;
 
-        elTaulell.appendChild(div);
+        elements.taulell.appendChild(div);
     });
 
 
@@ -550,7 +547,7 @@ function hoPintaTot() {
     // TORN ACTIU
     // ==================================================
 
-    const elTorn = document.getElementById("turn");
+    const elTorn = elements.torn;
 
     if (elTorn) {
         elTorn.innerText = "Torn: " + equips[equipActiu].nomEq;
@@ -562,7 +559,7 @@ function hoPintaTot() {
     // MARCADOR
     // ==================================================
 
-    const elMarcador = document.getElementById("scores");
+    const elMarcador = elements.marcador;
 
     if (!elMarcador) return;
 
@@ -754,20 +751,10 @@ function gestionaEventCasella() {
  * - opcions
  */
 function showModal(data) {
-
-    const o = document.getElementById("overlay");
-
-    o.classList.add("show");
-
+    elements.overlay.classList.add("show");
     document.getElementById("title").innerText = data.title;
-
     document.getElementById("text").innerText = data.text;
-
-    const ch = document.getElementById("choices");
-
-    ch.innerHTML = "";
-
-
+    elements.choices.innerHTML = "";
     // Crear botons d’opcions
     data.choices.forEach(opt => {
 
@@ -791,7 +778,7 @@ function showModal(data) {
             t.barra2 += opt.barra2 || 0;
 
             // Tancar modal
-            o.classList.remove("show");
+            elements.overlay.classList.remove("show");
 
             clearInterval(interval);
 
@@ -808,7 +795,7 @@ function showModal(data) {
             seguentTorn();
         };
 
-        ch.appendChild(b);
+        elements.choices.appendChild(b);
     });
 
     startTimer();
@@ -872,9 +859,8 @@ function startTimer() {
 
     let time = TEMPS_PER_DEFECTE;
 
-    const timerEl = document.getElementById("timer");
-
-    if (!timerEl) return;
+    
+    if (!elements.timer) return;
 
     clearInterval(interval);
 
@@ -887,24 +873,24 @@ function startTimer() {
         // Temps normal
         if (time > 5) {
 
-            timerEl.innerText =
+            elements.timer.innerText =
                 `${time}s → decidiu`;
 
-            timerEl.style.color = "orange";
+            elements.timer.style.color = "orange";
 
 
         // Temps crític
         } else if (time > 0) {
 
-            timerEl.innerText = `⚠️ ${time}s`;
+            elements.timer.innerText = `⚠️ ${time}s`;
 
-            timerEl.style.color = "red";
+            elements.timer.style.color = "red";
 
 
         // Temps esgotat
         } else {
 
-            timerEl.innerText =
+            elements.timer.innerText =
                 "Temps! Porta veu!";
 
             clearInterval(interval);
@@ -952,7 +938,7 @@ function seguentTorn() {
 
     equipActiu = (equipActiu + 1) % equips.length;
 
-    document.getElementById("dice").innerText = "🎲";
+    elements.dau.innerText = "🎲";
 
     hoPintaTot();
 
@@ -968,7 +954,7 @@ function seguentTorn() {
  */
 function resetDice() {
 
-    const d = document.getElementById("dice");
+    const d = elements.dau;
 
     d.innerText = "🎲";
 
@@ -1174,10 +1160,7 @@ function buildRandomTeams() {
  * a la pantalla inicial.
  */
 function pintaPreviewEquips() {
-
-    const el = document.getElementById("teamsPreview");
-
-    el.innerHTML = equips.map(equip => `
+    elements.previewEquips.innerHTML = equips.map(equip => `
         <div style="margin-bottom:10px">
             <strong style="color:${equip.color}">
                 ${equip.nomEq}
@@ -1197,7 +1180,7 @@ function pintaPreviewEquips() {
  */
 function iniciaPartida() {
 
-    document.getElementById("setup")
+    elements.setup
         .style.display = "none";
 
     equipActiu = 0;
@@ -1249,7 +1232,7 @@ async function init() {
 
         quantitatDeTorns = loadedGame.turns;
 
-        document.getElementById("setup")
+        elements.setup
             .style.display = "none";
 
         hoPintaTot();
