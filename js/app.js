@@ -57,7 +57,17 @@ const tipus = [
 // Nombre total de caselles del tauler.
 const qtatTotalDeCaselles = 36;
 
-
+const elements = {
+    taulell: document.getElementById("board"),
+    dau: document.getElementById("dice"),
+    marcador: document.getElementById("scores"),
+    torn: document.getElementById("turn"),
+    overlay: document.getElementById("overlay"),
+    choices: document.getElementById("choices"),
+    timer: document.getElementById("timer"),
+    setup: document.getElementById("setup"),
+    previewEquips: document.getElementById("teamsPreview")
+};
 
 // ======================================================
 // EVENTS DE BOTONS
@@ -665,7 +675,7 @@ function rollDice() {
 
     const r = Math.floor(Math.random() * 6) + 1;
 
-    document.getElementById("dice").innerText = r;
+    elements.dau.innerText = r;
 
     const t = equips[equipActiu];
 
