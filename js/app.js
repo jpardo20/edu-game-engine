@@ -112,9 +112,6 @@ function pintaMarcador() {
 import Equip from "./core/Equip.js";
 import Partida from "./core/Partida.js";
 
-
-
-
 const partida = new Partida();
 
 partida.inici();
@@ -123,30 +120,9 @@ partida.inici();
 // CONFIGURACIÓ GLOBAL
 // ======================================================
 
-// Temps per defecte (en segons) del temporitzador
-// que apareix dins del modal de preguntes.
-// config.tempsPerTorn
-
-// Nombre de columnes del tauler.
-// IMPORTANT:
-// Ha de coincidir amb el valor definit al CSS.
-// config.columnesTaulell
-
-// Objecte utilitzat per recordar quines preguntes
-// ja han sortit durant la partida.
-// Exemple:
-// used["decisio"] = [0,2]
 const preguntesFetes = {};
 
-// Variable global que contindrà tots els equips.
 let equips = [];
-
-// Tipus de caselles possibles del tauler.
-// Aquest array es reutilitza cíclicament.
-// config.tipusCaselles
-
-// Nombre total de caselles del tauler.
-// config.casellesTotals
 
 const elements = {
     taulell: document.getElementById("board"),
@@ -164,48 +140,33 @@ const elements = {
 // EVENTS DE BOTONS
 // ======================================================
 
-// Barrejar equips
 document.getElementById("shuffleBtn")
     .addEventListener("click", buildRandomTeams);
 
-// Iniciar partida
 document.getElementById("startBtn")
     .addEventListener("click", iniciaPartida);
 
-// Eliminar equips guardats
 document.getElementById("clearTeamsBtn")
     .addEventListener("click", netejaSistema);
 
-// Reiniciar partida mantenint equips
 document.getElementById("resetGameBtn")
     .addEventListener("click", resetGame);
 
 document.getElementById("diceBtn")
-    .addEventListener("click", rollDice)
-
-document.getElementById("resetGameBtn")
-    .addEventListener("click", resetGame)
+    .addEventListener("click", rollDice);
 
 document.getElementById("fullResetGameBtn")
-    .addEventListener("click", reiniciComplet)
+    .addEventListener("click", reiniciComplet);
 
 
 // ======================================================
 // VARIABLES GLOBALS D'ESTAT
 // ======================================================
 
-// Índex de l’equip actiu.
 let equipActiu = 0;
-
-// Nombre total de torns jugats.
 let quantitatDeTorns = 0;
-
-// Referència al temporitzador.
 let interval;
 
-
-// Objecte que contindrà totes les preguntes carregades
-// des de preguntes.json
 let preguntes = {};
 
 let config = {};
@@ -214,45 +175,43 @@ let columnesTaulell;
 let tipusCaselles;
 let casellesTotals;
 
+let taulell = [];
+
 
 // ======================================================
 // CREACIÓ DEL TAULER
 // ======================================================
 
-// Generem el tauler automàticament.
-// La primera casella és START.
-// L’última és FINAL.
-// La resta van alternant tipus.
-// const taulell = [...Array(casellesTotals)].map((_, i) => {
+function creaTaulell() {
 
-//     // Casella inicial
-//     if (i === 0) return { type: "start" };
+    taulell = [...Array(casellesTotals)].map((_, i) => {
 
-//     // Casella final
-//     if (i === casellesTotals - 1) return { type: "final" };
+        if (i === 0) {
+            return { type: "start" };
+        }
 
-//     // Caselles normals
-//     return { type: tipusCaselles[i % tipusCaselles.length] };
-// });
-let taulell = [];
+        if (i === casellesTotals - 1) {
+            return { type: "final" };
+        }
+
+        return {
+            type: tipusCaselles[
+                i % tipusCaselles.length
+            ]
+        };
+    });
+}
+
 
 // ======================================================
 // ALUMNES
 // ======================================================
 
-// Aquí guardarem els alumnes carregats
-// des del JSON.
 let alumnesData = [];
-
 
 
 /**
  * Carrega el fitxer alumnes.json.
- * 
- * El JSON conté:
- * - firstname
- * - lastname
- * - grup (DAM o SMX)
  */
 async function carregaAlumnes() {
 
@@ -272,7 +231,6 @@ async function carregaAlumnes() {
 }
 
 
-
 /**
  * Omple el textarea de la pantalla inicial
  * amb els noms dels alumnes carregats.
@@ -287,21 +245,10 @@ function ompleTextarea() {
 }
 
 
-
 // ======================================================
 // GUARDAR / CARREGAR PARTIDA
 // ======================================================
 
-
-
-/**
- * Guarda l’estat actual de la partida.
- * 
- * Es desa:
- * - equips
- * - torn actiu
- * - número de torns
- */
 function guardaPartida() {
 
     const data = {
@@ -317,14 +264,6 @@ function guardaPartida() {
 }
 
 
-
-/**
- * Carrega una partida guardada.
- * 
- * Retorna:
- * - objecte amb dades
- * - o null si no existeix
- */
 function carregaPartida() {
 
     const data = localStorage.getItem("bassaGame");
@@ -342,15 +281,6 @@ function carregaPartida() {
 }
 
 
-
-/**
- * Guarda només els equips.
- * 
- * Això permet:
- * - mantenir equips
- * - reiniciar partida
- * - conservar distribució
- */
 function guardaEquips() {
 
     localStorage.setItem(
@@ -359,32 +289,7 @@ function guardaEquips() {
     );
 }
 
-function creaTaulell() {
 
-    taulell = [...Array(casellesTotals)].map((_, i) => {
-
-        // Casella inicial
-        if (i === 0) {
-            return { type: "start" };
-        }
-
-        // Casella final
-        if (i === casellesTotals - 1) {
-            return { type: "final" };
-        }
-
-        // Caselles normals
-        return {
-            type: tipusCaselles[
-                i % tipusCaselles.length
-            ]
-        };
-    });
-}
-
-/**
- * Carrega equips guardats.
- */
 function carregaEquips() {
 
     const data = localStorage.getItem("bassaTeams");
@@ -402,14 +307,6 @@ function carregaEquips() {
 }
 
 
-
-/**
- * Elimina:
- * - equips
- * - partida
- * 
- * i deixa el sistema net.
- */
 function netejaSistema() {
 
     localStorage.removeItem("bassaTeams");
@@ -426,16 +323,6 @@ function netejaSistema() {
 }
 
 
-
-/**
- * Reinici total complet.
- * 
- * Elimina:
- * - equips
- * - partida
- * 
- * i torna a mostrar el setup inicial.
- */
 function reiniciComplet() {
 
     localStorage.removeItem("bassaGame");
@@ -459,11 +346,6 @@ function reiniciComplet() {
 }
 
 
-
-/**
- * Reinicia la partida
- * però conserva els equips.
- */
 function resetGame() {
 
     equips.forEach(equip => {
@@ -486,16 +368,10 @@ function resetGame() {
 }
 
 
-
 // ======================================================
 // PREGUNTES
 // ======================================================
 
-
-
-/**
- * Carrega preguntes.json.
- */
 async function carregaPreguntes() {
 
     const res = await fetch("./data/preguntes.json");
@@ -504,40 +380,17 @@ async function carregaPreguntes() {
 }
 
 
-
 // ======================================================
 // RENDER DEL TAULER
 // ======================================================
 
-
-
-/**
- * Renderitza TOT:
- * - tauler
- * - fitxes
- * - marcador
- * - equips
- * - torn actiu
- */
 function hoPintaTot() {
+
     elements.taulell.innerHTML = "";
 
     const filesTaulell = Math.ceil(taulell.length / columnesTaulell);
 
     let orderedIndexes = [];
-
-
-    // ==================================================
-    // CONSTRUCCIÓ ORDRE "SERP"
-    // ==================================================
-    //
-    // Exemple:
-    //
-    // 0 1 2 3 4 5
-    // 11 10 9 8 7 6
-    // 12 13 14 ...
-    //
-    // ==================================================
 
     for (let filaTaulell = 0; filaTaulell < filesTaulell; filaTaulell++) {
 
@@ -552,17 +405,12 @@ function hoPintaTot() {
             }
         }
 
-        // Files imparells invertides
         if (filaTaulell % 2 === 1) {
             files.reverse();
         }
 
         orderedIndexes = orderedIndexes.concat(files);
     }
-
-    // ==================================================
-    // CREACIÓ DE CASELLES
-    // ==================================================
 
     orderedIndexes.forEach((indexTaulell, posicioTaulell) => {
 
@@ -572,39 +420,54 @@ function hoPintaTot() {
 
         let direccio = "";
 
-
         // ==============================================
         // DIRECCIÓ DE FLETXA
         // ==============================================
+        //
+        // Important:
+        // La casella final es detecta per l'índex REAL
+        // del taulell, no per la posició visual dins del grid.
+        //
+        // Això evita que la bandera surti a la casella visualment
+        // més extrema de l'última fila i fa que aparegui a la
+        // darrera casella real del joc.
+        // ==============================================
 
-        if (seguentPosicio < orderedIndexes.length) {
+        if (indexTaulell === taulell.length - 1) {
 
-            const fila = Math.floor(posicioTaulell / columnesTaulell);
-            const columna = posicioTaulell % columnesTaulell;
-
-            const seguentFila = Math.floor(seguentPosicio / columnesTaulell);
-            const seguentColumna = seguentPosicio % columnesTaulell;
-
-            // Mateixa fila
-            if (fila === seguentFila) {
-
-                direccio = (seguentColumna > columna)
-                    ? "right"
-                    : "left";
-
-            } else {
-
-                // Salt de fila
-                direccio = "down";
-            }
+            direccio = "end";
 
         } else {
 
-            direccio = "end";
+            const fila = Math.floor(posicioTaulell / columnesTaulell);
+
+            const esFilaInvertida = fila % 2 === 1;
+
+            const esUltimaCasellaFilaNormal =
+                !esFilaInvertida
+                && posicioTaulell % columnesTaulell === columnesTaulell - 1;
+
+            const esUltimaCasellaFilaInvertida =
+                esFilaInvertida
+                && posicioTaulell % columnesTaulell === 0;
+
+            if (
+                esUltimaCasellaFilaNormal
+                || esUltimaCasellaFilaInvertida
+            ) {
+
+                direccio = "down";
+
+            } else if (esFilaInvertida) {
+
+                direccio = "left";
+
+            } else {
+
+                direccio = "right";
+            }
         }
 
-
-        // Etiqueta tipus de casella
         const etiquetaCasella = (
             casellaActual.type !== "start"
             && casellaActual.type !== "final"
@@ -612,19 +475,15 @@ function hoPintaTot() {
             ? `<div class="cell-type">${casellaActual.type.toUpperCase()}</div>`
             : "";
 
+        const quiHiHaAqui = equips.some(
+            equip => equip.posicioTaulell === indexTaulell
+        );
 
-        // Detectar si hi ha equips a la casella
-        const quiHiHaAqui = equips.some(t => t.posicioTaulell === indexTaulell);
-
-
-        // Crear element HTML
         const div = document.createElement("div");
 
         div.className =
             `cell ${casellaActual.type} dir-${direccio} ${quiHiHaAqui ? "active-cell" : ""}`;
 
-
-        // HTML intern de la casella
         div.innerHTML = `
             <div class='cell-number'>${indexTaulell}</div>
             ${etiquetaCasella}
@@ -633,12 +492,6 @@ function hoPintaTot() {
 
         elements.taulell.appendChild(div);
     });
-
-
-
-    // ==================================================
-    // TOKENS / FITXES
-    // ==================================================
 
     equips.forEach(equip => {
 
@@ -657,39 +510,20 @@ function hoPintaTot() {
         }
     });
 
-
-
-    // ==================================================
-    // TORN ACTIU
-    // ==================================================
-
     const elTorn = elements.torn;
 
-    if (elTorn) {
+    if (elTorn && equips[equipActiu]) {
         elTorn.innerText = "Torn: " + equips[equipActiu].nomEq;
     }
 
-
-
-    // ==================================================
-    // MARCADOR
-    // ==================================================
-    pintaMarcador()
-
+    pintaMarcador();
 }
-
 
 
 // ======================================================
 // DAU
 // ======================================================
 
-
-
-/**
- * Genera un número aleatori de 1 a 6
- * i inicia el moviment.
- */
 function rollDice() {
 
     const r = Math.floor(Math.random() * 6) + 1;
@@ -702,16 +536,10 @@ function rollDice() {
 }
 
 
-
 // ======================================================
 // EVENTS DE CASELLES
 // ======================================================
 
-
-
-/**
- * Gestiona l’event de la casella actual.
- */
 function gestionaEventCasella() {
 
     const t = equips[equipActiu];
@@ -730,8 +558,6 @@ function gestionaEventCasella() {
 
     const type = casellaActual.type;
 
-
-    // START
     if (type === "start") {
 
         seguentTorn();
@@ -739,8 +565,6 @@ function gestionaEventCasella() {
         return;
     }
 
-
-    // FINAL
     if (type === "final") {
 
         const finalQ = preguntes.final?.[0];
@@ -750,8 +574,6 @@ function gestionaEventCasella() {
         return;
     }
 
-
-    // Preguntes del tipus corresponent
     const pool = preguntes[type];
 
     if (!pool || pool.length === 0) {
@@ -763,63 +585,45 @@ function gestionaEventCasella() {
         return;
     }
 
-
-    // Pregunta aleatòria
     const data = getRandomQuestion(type);
 
     showModal(data);
 }
 
 
-
 // ======================================================
 // MODAL DE PREGUNTES
 // ======================================================
 
-
-
-/**
- * Mostra el modal amb:
- * - títol
- * - text
- * - opcions
- */
 function showModal(data) {
+
     elements.overlay.classList.add("show");
+
     document.getElementById("title").innerText = data.title;
     document.getElementById("text").innerText = data.text;
+
     elements.choices.innerHTML = "";
-    // Crear botons d’opcions
+
     data.choices.forEach(opt => {
 
         const b = document.createElement("button");
 
         b.className = "choice";
-
         b.innerText = opt.text;
-
-
-        // ==============================================
-        // QUÈ PASSA QUAN TRIEM UNA OPCIÓ
-        // ==============================================
 
         b.onclick = () => {
 
             const t = equips[equipActiu];
 
-            // Modificar puntuacions
             t.barra1 += opt.barra1 || 0;
             t.barra2 += opt.barra2 || 0;
 
-            // Tancar modal
             elements.overlay.classList.remove("show");
 
             clearInterval(interval);
 
-            // Comptador de torns
             quantitatDeTorns++;
 
-            // Sistema injust cada 3 torns
             if (quantitatDeTorns % 3 === 0) {
                 unfair();
             }
@@ -836,17 +640,10 @@ function showModal(data) {
 }
 
 
-
 // ======================================================
 // PREGUNTA ALEATÒRIA
 // ======================================================
 
-
-
-/**
- * Retorna una pregunta aleatòria
- * evitant repeticions immediates.
- */
 function getRandomQuestion(type) {
 
     if (!preguntesFetes[type]) {
@@ -859,7 +656,6 @@ function getRandomQuestion(type) {
         (_, i) => !preguntesFetes[type].includes(i)
     );
 
-    // Reiniciar si ja s’han fet totes
     if (available.length === 0) {
 
         preguntesFetes[type] = [];
@@ -879,32 +675,22 @@ function getRandomQuestion(type) {
 }
 
 
-
 // ======================================================
 // TIMER
 // ======================================================
 
-
-
-/**
- * Inicia el temporitzador del modal.
- */
 function startTimer() {
 
     let time = tempsPerTorn;
-
 
     if (!elements.timer) return;
 
     clearInterval(interval);
 
-
     interval = setInterval(() => {
 
         time--;
 
-
-        // Temps normal
         if (time > 5) {
 
             elements.timer.innerText =
@@ -912,16 +698,12 @@ function startTimer() {
 
             elements.timer.style.color = "orange";
 
-
-            // Temps crític
         } else if (time > 0) {
 
             elements.timer.innerText = `⚠️ ${time}s`;
 
             elements.timer.style.color = "red";
 
-
-            // Temps esgotat
         } else {
 
             elements.timer.innerText =
@@ -934,19 +716,10 @@ function startTimer() {
 }
 
 
-
 // ======================================================
 // SISTEMA INJUST
 // ======================================================
 
-
-
-/**
- * Sistema que afavoreix qui ja és viral.
- * 
- * Simula el funcionament dels algoritmes:
- * qui ja destaca, encara destaca més.
- */
 function unfair() {
 
     const sorted = [...equips]
@@ -958,16 +731,10 @@ function unfair() {
 }
 
 
-
 // ======================================================
 // CANVI DE TORN
 // ======================================================
 
-
-
-/**
- * Passa el torn al següent equip.
- */
 function seguentTorn() {
 
     equipActiu = (equipActiu + 1) % equips.length;
@@ -982,10 +749,6 @@ function seguentTorn() {
 }
 
 
-
-/**
- * Animació visual del dau.
- */
 function resetDice() {
 
     const d = elements.dau;
@@ -1001,23 +764,16 @@ function resetDice() {
 }
 
 
-
 // ======================================================
 // MOVIMENT ANIMAT
 // ======================================================
 
-
-
-/**
- * Mou una fitxa pas a pas.
- */
 function moveStepByStep(equip, steps) {
 
     let count = 0;
 
     const move = setInterval(() => {
 
-        // Final moviment
         if (
             count >= steps
             || equip.posicioTaulell >= casellesTotals - 1
@@ -1027,13 +783,11 @@ function moveStepByStep(equip, steps) {
 
             hoPintaTot();
 
-            // Petit delay abans del modal
             setTimeout(() => gestionaEventCasella(), 500);
 
             return;
         }
 
-        // Avançar una casella
         equip.posicioTaulell++;
 
         hoPintaTot();
@@ -1044,27 +798,16 @@ function moveStepByStep(equip, steps) {
 }
 
 
-
 // ======================================================
 // ALUMNES / EQUIPS
 // ======================================================
 
-
-
-/**
- * Retorna tots els alumnes carregats.
- */
 function getStudentsObjects() {
 
     return alumnesData;
 }
 
 
-
-/**
- * Barreja aleatòriament un array
- * utilitzant Fisher-Yates.
- */
 function shuffle(arr) {
 
     const copy = [...arr];
@@ -1083,15 +826,6 @@ function shuffle(arr) {
 }
 
 
-
-/**
- * Genera equips equilibrats.
- * 
- * Objectiu:
- * cada equip ha de tenir:
- * - DAM
- * - SMX
- */
 function buildRandomTeams() {
 
     const students = getStudentsObjects();
@@ -1110,8 +844,6 @@ function buildRandomTeams() {
         "purple"
     ];
 
-
-    // Crear equips buits
     equips = names.map((n, i) => {
 
         const equip = new Equip(n);
@@ -1119,11 +851,8 @@ function buildRandomTeams() {
         equip.color = colors[i];
 
         return equip;
-
     });
 
-
-    // Separar alumnes per grup
     const dam = students.filter(
         s => s.grup === "DAM"
     );
@@ -1132,12 +861,9 @@ function buildRandomTeams() {
         s => s.grup === "SMX"
     );
 
-
     shuffle(dam);
     shuffle(smx);
 
-
-    // Validació mínima
     if (
         dam.length < equips.length
         || smx.length < equips.length
@@ -1148,8 +874,6 @@ function buildRandomTeams() {
         );
     }
 
-
-    // Assignar 1 DAM
     equips.forEach((t, i) => {
 
         if (dam[i]) {
@@ -1157,8 +881,6 @@ function buildRandomTeams() {
         }
     });
 
-
-    // Assignar 1 SMX
     equips.forEach((t, i) => {
 
         if (smx[i]) {
@@ -1166,8 +888,6 @@ function buildRandomTeams() {
         }
     });
 
-
-    // Resta alumnes
     const remaining = [
         ...dam.slice(equips.length),
         ...smx.slice(equips.length)
@@ -1181,19 +901,14 @@ function buildRandomTeams() {
             .membresEq.push(s);
     });
 
-
     pintaPreviewEquips();
 
     guardaEquips();
 }
 
 
-
-/**
- * Mostra els equips generats
- * a la pantalla inicial.
- */
 function pintaPreviewEquips() {
+
     elements.previewEquips.innerHTML = equips.map(equip => `
         <div style="margin-bottom:10px">
             <strong style="color:${equip.color}">
@@ -1201,26 +916,20 @@ function pintaPreviewEquips() {
             </strong><br>
 
             ${equip.membresEq
-            .map(m => `${m.firstname} ${m.lastname}`)
-            .join(", ")}
+                .map(m => `${m.firstname} ${m.lastname}`)
+                .join(", ")}
         </div>
     `).join("");
 }
 
 
-
-/**
- * Inicia una nova partida.
- */
 function iniciaPartida() {
 
     elements.setup
         .style.display = "none";
 
     equipActiu = 0;
-
     quantitatDeTorns = 0;
-
 
     equips.forEach(t => {
 
@@ -1235,7 +944,6 @@ function iniciaPartida() {
 }
 
 
-
 // ======================================================
 // INIT
 // ======================================================
@@ -1245,25 +953,23 @@ async function carregaConfiguracio() {
     const res = await fetch("./data/config.json");
 
     config = await res.json();
+
     tempsPerTorn = config.tempsPerTorn;
     columnesTaulell = config.columnesTaulell;
     tipusCaselles = config.tipusCaselles;
     casellesTotals = config.casellesTotals;
 }
 
-/**
- * Inicialització principal del sistema.
- */
+
 async function init() {
+
     await carregaConfiguracio();
+
     creaTaulell();
+
     await carregaPreguntes();
+
     await carregaAlumnes();
-
-
-    // ==================================================
-    // 1. PARTIDA EN CURS
-    // ==================================================
 
     const loadedGame = carregaPartida();
 
@@ -1283,11 +989,6 @@ async function init() {
         return;
     }
 
-
-    // ==================================================
-    // 2. EQUIPS GUARDATS
-    // ==================================================
-
     const loadedTeams = carregaEquips();
 
     if (loadedTeams) {
@@ -1299,16 +1000,10 @@ async function init() {
         return;
     }
 
-
-    // ==================================================
-    // 3. PRIMERA EXECUCIÓ
-    // ==================================================
-
     buildRandomTeams();
 
     hoPintaTot();
 }
-
 
 
 // Inicialitzar aplicació
