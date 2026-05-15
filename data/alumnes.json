@@ -1,0 +1,49 @@
+{
+    "alumnes": [
+        {
+            "firstname": "Marc",
+            "lastname": "López",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Merouan",
+            "lastname": "Kiass",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Clemente",
+            "lastname": "Ramos",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Daniel",
+            "lastname": "De Paiva",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Berta",
+            "lastname": "Arenas",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Lem",
+            "lastname": "Quilca",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Hugo",
+            "lastname": "Gonzalez",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Carlos",
+            "lastname": "Ruiz",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Javier",
+            "lastname": "Tituaña",
+            "grup": "DAM"
+        }
+    ]
+}
