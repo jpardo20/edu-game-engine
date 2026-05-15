@@ -1,0 +1,20 @@
+{
+  "titol": "La Bassa Digital",
+
+  "tempsPerTorn": 10,
+
+  "columnesTaulell": 6,
+
+  "casellesTotals": 36,
+
+  "tipusCaselles": [
+    "decisio",
+    "algoritme",
+    "trampa",
+    "pressio",
+    "viral",
+    "decisio",
+    "trampa",
+    "algoritme"
+  ]
+}
