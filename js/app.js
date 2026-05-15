@@ -10,12 +10,12 @@
 // - puntuacions
 // - persistència amb localStorage
 // ======================================================
+import Equip from "./core/Equip.js";
+import Partida from "./core/Partida.js";
 
-import Game from "./core/Game.js";
+const partida = new Partida();
 
-const game = new Game();
-
-game.start();
+partida.inici();
 
 // ======================================================
 // CONFIGURACIÓ GLOBAL
@@ -28,21 +28,21 @@ const TEMPS_PER_DEFECTE = 10;
 // Nombre de columnes del tauler.
 // IMPORTANT:
 // Ha de coincidir amb el valor definit al CSS.
-const cols = 6;
+const columnesTaulell = 6;
 
 // Objecte utilitzat per recordar quines preguntes
 // ja han sortit durant la partida.
 // Exemple:
 // used["decisio"] = [0,2]
-const used = {};
+const preguntesFetes = {};
 
 // Variable global que contindrà tots els equips.
-let teams = [];
+let equips = [];
 
 
 // Tipus de caselles possibles del tauler.
 // Aquest array es reutilitza cíclicament.
-const types = [
+const tipus = [
     "decisio",
     "algoritme",
     "trampa",
@@ -55,7 +55,7 @@ const types = [
 
 
 // Nombre total de caselles del tauler.
-const caselles = 36;
+const qtatTotalDeCaselles = 36;
 
 
 
@@ -69,11 +69,11 @@ document.getElementById("shuffleBtn")
 
 // Iniciar partida
 document.getElementById("startBtn")
-    .addEventListener("click", startGame);
+    .addEventListener("click", iniciaPartida);
 
 // Eliminar equips guardats
 document.getElementById("clearTeamsBtn")
-    .addEventListener("click", clearTeams);
+    .addEventListener("click", netejaSistema);
 
 // Reiniciar partida mantenint equips
 document.getElementById("resetGameBtn")
@@ -86,7 +86,7 @@ document.getElementById("resetGameBtn")
     .addEventListener("click",resetGame)
 
 document.getElementById("fullResetGameBtn")
-    .addEventListener("click",fullResetGame)
+    .addEventListener("click",reiniciComplet)
 
 
 // ======================================================
@@ -94,10 +94,10 @@ document.getElementById("fullResetGameBtn")
 // ======================================================
 
 // Índex de l’equip actiu.
-let active = 0;
+let equipActiu = 0;
 
 // Nombre total de torns jugats.
-let turns = 0;
+let quantitatDeTorns = 0;
 
 // Referència al temporitzador.
 let interval;
@@ -117,16 +117,16 @@ let preguntes = {};
 // La primera casella és START.
 // L’última és FINAL.
 // La resta van alternant tipus.
-const board = [...Array(caselles)].map((_, i) => {
+const taulell = [...Array(qtatTotalDeCaselles)].map((_, i) => {
 
     // Casella inicial
     if (i === 0) return { type: "start" };
 
     // Casella final
-    if (i === caselles - 1) return { type: "final" };
+    if (i === qtatTotalDeCaselles - 1) return { type: "final" };
 
     // Caselles normals
-    return { type: types[i % types.length] };
+    return { type: tipus[i % tipus.length] };
 });
 
 
@@ -149,7 +149,7 @@ let alumnesData = [];
  * - lastname
  * - grup (DAM o SMX)
  */
-async function loadAlumnes() {
+async function carregaAlumnes() {
 
     try {
 
@@ -158,7 +158,7 @@ async function loadAlumnes() {
 
         alumnesData = data.alumnes;
 
-        fillTextarea();
+        ompleTextarea();
 
     } catch (err) {
 
@@ -172,7 +172,7 @@ async function loadAlumnes() {
  * Omple el textarea de la pantalla inicial
  * amb els noms dels alumnes carregats.
  */
-function fillTextarea() {
+function ompleTextarea() {
 
     const textarea = document.getElementById("studentsInput");
 
@@ -197,12 +197,12 @@ function fillTextarea() {
  * - torn actiu
  * - número de torns
  */
-function saveGame() {
+function guardaPartida() {
 
     const data = {
-        teams,
-        active,
-        turns
+        equips,
+        active: equipActiu,
+        turns: quantitatDeTorns
     };
 
     localStorage.setItem(
@@ -220,7 +220,7 @@ function saveGame() {
  * - objecte amb dades
  * - o null si no existeix
  */
-function loadGame() {
+function carregaPartida() {
 
     const data = localStorage.getItem("bassaGame");
 
@@ -246,11 +246,11 @@ function loadGame() {
  * - reiniciar partida
  * - conservar distribució
  */
-function saveTeams() {
+function guardaEquips() {
 
     localStorage.setItem(
         "bassaTeams",
-        JSON.stringify(teams)
+        JSON.stringify(equips)
     );
 }
 
@@ -259,7 +259,7 @@ function saveTeams() {
 /**
  * Carrega equips guardats.
  */
-function loadTeams() {
+function carregaEquips() {
 
     const data = localStorage.getItem("bassaTeams");
 
@@ -284,19 +284,19 @@ function loadTeams() {
  * 
  * i deixa el sistema net.
  */
-function clearTeams() {
+function netejaSistema() {
 
     localStorage.removeItem("bassaTeams");
     localStorage.removeItem("bassaGame");
 
-    teams = [];
+    equips = [];
 
-    active = 0;
-    turns = 0;
+    equipActiu = 0;
+    quantitatDeTorns = 0;
 
     document.getElementById("teamsPreview").innerHTML = "";
 
-    render();
+    hoPintaTot();
 }
 
 
@@ -310,26 +310,26 @@ function clearTeams() {
  * 
  * i torna a mostrar el setup inicial.
  */
-function fullResetGame() {
+function reiniciComplet() {
 
     localStorage.removeItem("bassaGame");
     localStorage.removeItem("bassaTeams");
 
-    active = 0;
-    turns = 0;
+    equipActiu = 0;
+    quantitatDeTorns = 0;
 
-    teams.forEach(t => {
+    equips.forEach(equip => {
 
-        t.pos = 0;
-        t.pop = 0;
-        t.crit = 0;
+        equip.posicioTaulell = 0;
+        equip.barra1 = 0;
+        equip.barra2 = 0;
     });
 
     document.getElementById("setup").style.display = "flex";
 
     renderTeamsPreview();
 
-    render();
+    hoPintaTot();
 }
 
 
@@ -340,21 +340,21 @@ function fullResetGame() {
  */
 function resetGame() {
 
-    teams.forEach(t => {
+    equips.forEach(equip => {
 
-        t.pos = 0;
-        t.pop = 0;
-        t.crit = 0;
+        equip.posicioTaulell = 0;
+        equip.barra1 = 0;
+        equip.barra2 = 0;
     });
 
-    active = 0;
-    turns = 0;
+    equipActiu = 0;
+    quantitatDeTorns = 0;
 
     localStorage.removeItem("bassaGame");
 
-    saveTeams();
+    guardaEquips();
 
-    render();
+    hoPintaTot();
 
     document.getElementById("setup").style.display = "none";
 }
@@ -393,13 +393,13 @@ async function loadQuestions() {
  * - equips
  * - torn actiu
  */
-function render() {
+function hoPintaTot() {
 
-    const b = document.getElementById("board");
+    const elTaulell = document.getElementById("board");
 
-    b.innerHTML = "";
+    elTaulell.innerHTML = "";
 
-    const rows = Math.ceil(board.length / cols);
+    const filesTaulell = Math.ceil(taulell.length / columnesTaulell);
 
     let orderedIndexes = [];
 
@@ -416,101 +416,99 @@ function render() {
     //
     // ==================================================
 
-    for (let r = 0; r < rows; r++) {
+    for (let filaTaulell = 0; filaTaulell < filesTaulell; filaTaulell++) {
 
-        let row = [];
+        let files = [];
 
-        for (let c = 0; c < cols; c++) {
+        for (let c = 0; c < columnesTaulell; c++) {
 
-            const index = r * cols + c;
+            const index = filaTaulell * columnesTaulell + c;
 
-            if (index < board.length) {
-                row.push(index);
+            if (index < taulell.length) {
+                files.push(index);
             }
         }
 
         // Files imparells invertides
-        if (r % 2 === 1) {
-            row.reverse();
+        if (filaTaulell % 2 === 1) {
+            files.reverse();
         }
 
-        orderedIndexes = orderedIndexes.concat(row);
+        orderedIndexes = orderedIndexes.concat(files);
     }
-
-
 
     // ==================================================
     // CREACIÓ DE CASELLES
     // ==================================================
 
-    orderedIndexes.forEach((i, pos) => {
+    orderedIndexes.forEach((indexTaulell, posicioTaulell) => {
 
-        const c = board[i];
+        const casellaActual = taulell[indexTaulell];
 
-        const nextPos = pos + 1;
+        const seguentPosicio = posicioTaulell + 1;
 
-        let direction = "";
+        let direccio = "";
 
 
         // ==============================================
         // DIRECCIÓ DE FLETXA
         // ==============================================
 
-        if (nextPos < orderedIndexes.length) {
+        if (seguentPosicio < orderedIndexes.length) {
 
-            const row = Math.floor(pos / cols);
-            const col = pos % cols;
+            const fila = Math.floor(posicioTaulell / columnesTaulell);
+            const columna = posicioTaulell % columnesTaulell;
 
-            const nextRow = Math.floor(nextPos / cols);
-            const nextCol = nextPos % cols;
+            const seguentFila = Math.floor(seguentPosicio / columnesTaulell);
+            const seguentColumna = seguentPosicio % columnesTaulell;
 
             // Mateixa fila
-            if (row === nextRow) {
+            if (fila === seguentFila) {
 
-                direction = (nextCol > col)
+                direccio = (seguentColumna > columna)
                     ? "right"
                     : "left";
 
             } else {
 
                 // Salt de fila
-                direction = "down";
+                direccio = "down";
             }
 
         } else {
 
-            direction = "end";
+            direccio = "end";
         }
 
 
         // Etiqueta tipus de casella
-        const label = (
-            c.type !== "start"
-            && c.type !== "final"
+        const etiquetaCasella = (
+            casellaActual.type !== "start"
+            && casellaActual.type !== "final"
         )
-            ? `<div class="cell-type">${c.type.toUpperCase()}</div>`
+            ? `<div class="cell-type">${casellaActual.type.toUpperCase()}</div>`
             : "";
 
 
         // Detectar si hi ha equips a la casella
-        const isHere = teams.some(t => t.pos === i);
+        const quiHiHaAqui = equips.some(t => t.posicioTaulell === indexTaulell);
 
 
         // Crear element HTML
         const div = document.createElement("div");
 
         div.className =
-            `cell ${c.type} dir-${direction} ${isHere ? "active-cell" : ""}`;
+            `cell ${casellaActual.type} dir-${direccio} ${quiHiHaAqui ? "active-cell" : ""}`;
 
 
         // HTML intern de la casella
         div.innerHTML = `
-            <div class='cell-number'>${i}</div>
-            ${label}
-            <div id='t${i}'></div>
+            <div class='cell-number'>${indexTaulell}</div>
+            ${etiquetaCasella}
+            <div id='t${indexTaulell}'></div>
         `;
 
-        b.appendChild(div);
+        elTaulell.appendChild(div);
     });
 
 
@@ -519,17 +517,17 @@ function render() {
     // TOKENS / FITXES
     // ==================================================
 
-    teams.forEach(t => {
+    equips.forEach(equip => {
 
         const tok = document.createElement("div");
 
         tok.className = "token";
 
-        tok.style.background = t.color;
+        tok.style.background = equip.color;
 
-        tok.textContent = t.name[0];
+        tok.textContent = equip.nomEq[0];
 
-        const slot = document.getElementById("t" + t.pos);
+        const slot = document.getElementById("t" + equip.posicioTaulell);
 
         if (slot) {
             slot.appendChild(tok);
@@ -542,10 +540,10 @@ function render() {
     // TORN ACTIU
     // ==================================================
 
-    const turnEl = document.getElementById("turn");
+    const elTorn = document.getElementById("turn");
 
-    if (turnEl) {
-        turnEl.innerText = "Torn: " + teams[active].name;
+    if (elTorn) {
+        elTorn.innerText = "Torn: " + equips[equipActiu].nomEq;
     }
 
 
@@ -554,17 +552,17 @@ function render() {
     // MARCADOR
     // ==================================================
 
-    const scoresEl = document.getElementById("scores");
+    const elMarcador = document.getElementById("scores");
 
-    if (!scoresEl) return;
+    if (!elMarcador) return;
 
-    scoresEl.innerHTML = teams.map(t => {
-        const isActive = t === teams[active];
+    elMarcador.innerHTML = equips.map(equip => {
+        const isActive = equip === equips[equipActiu];
         return `
     <div class="score-row">
 
   <div class="team-members-side">
-    ${t.members
+    ${equip.membresEq
                 .map(m => `${m.firstname} ${m.lastname}`)
                 .join("<hr>")}
   </div>
@@ -572,8 +570,8 @@ function render() {
   <div class='score ${isActive ? "active" : ""}'>
 
       <div class="score-header">
-        <span class="team-name" style="background:${t.color}">
-          ${t.name}
+        <span class="team-name" style="background:${equip.color}">
+          ${equip.nomEq}
         </span>
 
       </div>
@@ -589,8 +587,8 @@ function render() {
                 Viralitat
             </span>
 
-          <span class="value ${t.pop < 0 ? "neg" : "pos"}">
-            ${t.pop}
+          <span class="value ${equip.barra1 < 0 ? "neg" : "pos"}">
+            ${equip.barra1}
           </span>
         </div>
 
@@ -598,13 +596,13 @@ function render() {
           <div
             class="fill pop pos"
             style="
-                width:${Math.max(0, t.pop) * 10}%">
+                width:${Math.max(0, equip.barra1) * 10}%">
           </div>
 
           <div
             class="fill pop neg"
             style="
-                width:${Math.max(0, -t.pop) * 10}%">
+                width:${Math.max(0, -equip.barra1) * 10}%">
           </div>
         </div>
 
@@ -621,8 +619,8 @@ function render() {
                 Pensament crític
             </span>
 
-          <span class="value ${t.crit < 0 ? "neg" : "pos"}">
-            ${t.crit}
+          <span class="value ${equip.barra2 < 0 ? "neg" : "pos"}">
+            ${equip.barra2}
           </span>
         </div>
 
@@ -630,17 +628,17 @@ function render() {
           <div
             class="fill crit pos"
             style="
-                width:${Math.max(0, t.crit) * 10}%">
+                width:${Math.max(0, equip.barra2) * 10}%">
           </div>
 
           <div
             class="fill crit neg"
-                style="width:${Math.max(0, -t.crit) * 10}%">
+                style="width:${Math.max(0, -equip.barra2) * 10}%">
           </div>
         </div>
 
         <span class="pos" style="float:right; font-size:0.9rem;">
-          Casella ${t.pos}
+          Casella ${equip.posicioTaulell}
         </span>
       </div>
 
@@ -669,7 +667,7 @@ function rollDice() {
 
     document.getElementById("dice").innerText = r;
 
-    const t = teams[active];
+    const t = equips[equipActiu];
 
     moveStepByStep(t, r);
 }
@@ -687,9 +685,9 @@ function rollDice() {
  */
 function event() {
 
-    const t = teams[active];
+    const t = equips[equipActiu];
 
-    const type = board[t.pos].type;
+    const type = taulell[t.posicioTaulell].type;
 
 
     // START
@@ -776,11 +774,11 @@ function showModal(data) {
 
         b.onclick = () => {
 
-            const t = teams[active];
+            const t = equips[equipActiu];
 
             // Modificar puntuacions
-            t.pop += opt.pop || 0;
-            t.crit += opt.crit || 0;
+            t.barra1 += opt.barra1 || 0;
+            t.barra2 += opt.barra2 || 0;
 
             // Tancar modal
             o.classList.remove("show");
@@ -788,14 +786,14 @@ function showModal(data) {
             clearInterval(interval);
 
             // Comptador de torns
-            turns++;
+            quantitatDeTorns++;
 
             // Sistema injust cada 3 torns
-            if (turns % 3 === 0) {
+            if (quantitatDeTorns % 3 === 0) {
                 unfair();
             }
 
-            saveGame();
+            guardaPartida();
 
             nextTurn();
         };
@@ -820,20 +818,20 @@ function showModal(data) {
  */
 function getRandomQuestion(type) {
 
-    if (!used[type]) {
-        used[type] = [];
+    if (!preguntesFetes[type]) {
+        preguntesFetes[type] = [];
     }
 
     const pool = preguntes[type];
 
     const available = pool.filter(
-        (_, i) => !used[type].includes(i)
+        (_, i) => !preguntesFetes[type].includes(i)
     );
 
     // Reiniciar si ja s’han fet totes
     if (available.length === 0) {
 
-        used[type] = [];
+        preguntesFetes[type] = [];
 
         return getRandomQuestion(type);
     }
@@ -844,7 +842,7 @@ function getRandomQuestion(type) {
 
     const q = available[index];
 
-    used[type].push(pool.indexOf(q));
+    preguntesFetes[type].push(pool.indexOf(q));
 
     return q;
 }
@@ -921,12 +919,12 @@ function startTimer() {
  */
 function unfair() {
 
-    const sorted = [...teams]
-        .sort((a, b) => b.pop - a.pop);
+    const sorted = [...equips]
+        .sort((a, b) => b.barra1 - a.barra1);
 
-    sorted[0].pop += 2;
+    sorted[0].barra1 += 2;
 
-    sorted[sorted.length - 1].pop -= 1;
+    sorted[sorted.length - 1].barra1 -= 1;
 }
 
 
@@ -942,15 +940,15 @@ function unfair() {
  */
 function nextTurn() {
 
-    active = (active + 1) % teams.length;
+    equipActiu = (equipActiu + 1) % equips.length;
 
     document.getElementById("dice").innerText = "🎲";
 
-    render();
+    hoPintaTot();
 
     resetDice();
 
-    saveGame();
+    guardaPartida();
 }
 
 
@@ -983,7 +981,7 @@ function resetDice() {
 /**
  * Mou una fitxa pas a pas.
  */
-function moveStepByStep(team, steps) {
+function moveStepByStep(equip, steps) {
 
     let count = 0;
 
@@ -992,12 +990,12 @@ function moveStepByStep(team, steps) {
         // Final moviment
         if (
             count >= steps
-            || team.pos >= caselles - 1
+            || equip.posicioTaulell >= qtatTotalDeCaselles - 1
         ) {
 
             clearInterval(move);
 
-            render();
+            hoPintaTot();
 
             // Petit delay abans del modal
             setTimeout(() => event(), 500);
@@ -1006,9 +1004,9 @@ function moveStepByStep(team, steps) {
         }
 
         // Avançar una casella
-        team.pos++;
+        equip.posicioTaulell++;
 
-        render();
+        hoPintaTot();
 
         count++;
 
@@ -1084,14 +1082,15 @@ function buildRandomTeams() {
 
 
     // Crear equips buits
-    teams = names.map((n, i) => ({
-        name: n,
-        color: colors[i],
-        pos: 0,
-        pop: 0,
-        crit: 0,
-        members: []
-    }));
+    equips = names.map((n, i) => {
+
+        const equip = new Equip(n);
+
+        equip.color = colors[i];
+
+        return equip;
+
+    });
 
 
     // Separar alumnes per grup
@@ -1110,8 +1109,8 @@ function buildRandomTeams() {
 
     // Validació mínima
     if (
-        dam.length < teams.length
-        || smx.length < teams.length
+        dam.length < equips.length
+        || smx.length < equips.length
     ) {
 
         alert(
@@ -1121,41 +1120,41 @@ function buildRandomTeams() {
 
 
     // Assignar 1 DAM
-    teams.forEach((t, i) => {
+    equips.forEach((t, i) => {
 
         if (dam[i]) {
-            t.members.push(dam[i]);
+            t.membresEq.push(dam[i]);
         }
     });
 
 
     // Assignar 1 SMX
-    teams.forEach((t, i) => {
+    equips.forEach((t, i) => {
 
         if (smx[i]) {
-            t.members.push(smx[i]);
+            t.membresEq.push(smx[i]);
         }
     });
 
 
     // Resta alumnes
     const remaining = [
-        ...dam.slice(teams.length),
-        ...smx.slice(teams.length)
+        ...dam.slice(equips.length),
+        ...smx.slice(equips.length)
     ];
 
     shuffle(remaining);
 
     remaining.forEach((s, i) => {
 
-        teams[i % teams.length]
-            .members.push(s);
+        equips[i % equips.length]
+            .membresEq.push(s);
     });
 
 
     renderTeamsPreview();
 
-    saveTeams();
+    guardaEquips();
 }
 
 
@@ -1168,13 +1167,13 @@ function renderTeamsPreview() {
 
     const el = document.getElementById("teamsPreview");
 
-    el.innerHTML = teams.map(t => `
+    el.innerHTML = equips.map(equip => `
         <div style="margin-bottom:10px">
-            <strong style="color:${t.color}">
-                ${t.name}
+            <strong style="color:${equip.color}">
+                ${equip.nomEq}
             </strong><br>
 
-            ${t.members
+            ${equip.membresEq
                 .map(m => `${m.firstname} ${m.lastname}`)
                 .join(", ")}
         </div>
@@ -1186,26 +1185,26 @@ function renderTeamsPreview() {
 /**
  * Inicia una nova partida.
  */
-function startGame() {
+function iniciaPartida() {
 
     document.getElementById("setup")
         .style.display = "none";
 
-    active = 0;
+    equipActiu = 0;
 
-    turns = 0;
+    quantitatDeTorns = 0;
 
 
-    teams.forEach(t => {
+    equips.forEach(t => {
 
-        t.pos = 0;
-        t.pop = 0;
-        t.crit = 0;
+        t.posicioTaulell = 0;
+        t.barra1 = 0;
+        t.barra2 = 0;
     });
 
-    render();
+    hoPintaTot();
 
-    saveGame();
+    guardaPartida();
 }
 
 
@@ -1223,27 +1222,27 @@ async function init() {
 
     await loadQuestions();
 
-    await loadAlumnes();
+    await carregaAlumnes();
 
 
     // ==================================================
     // 1. PARTIDA EN CURS
     // ==================================================
 
-    const loadedGame = loadGame();
+    const loadedGame = carregaPartida();
 
     if (loadedGame) {
 
-        teams = loadedGame.teams;
+        equips = loadedGame.equips;
 
-        active = loadedGame.active;
+        equipActiu = loadedGame.active;
 
-        turns = loadedGame.turns;
+        quantitatDeTorns = loadedGame.turns;
 
         document.getElementById("setup")
             .style.display = "none";
 
-        render();
+        hoPintaTot();
 
         return;
     }
@@ -1253,11 +1252,11 @@ async function init() {
     // 2. EQUIPS GUARDATS
     // ==================================================
 
-    const loadedTeams = loadTeams();
+    const loadedTeams = carregaEquips();
 
     if (loadedTeams) {
 
-        teams = loadedTeams;
+        equips = loadedTeams;
 
         renderTeamsPreview();
 
@@ -1271,7 +1270,7 @@ async function init() {
 
     buildRandomTeams();
 
-    render();
+    hoPintaTot();
 }
 
 
