@@ -327,7 +327,7 @@ function reiniciComplet() {
 
     document.getElementById("setup").style.display = "flex";
 
-    renderTeamsPreview();
+    pintaPreviewEquips();
 
     hoPintaTot();
 }
@@ -370,7 +370,7 @@ function resetGame() {
 /**
  * Carrega preguntes.json.
  */
-async function loadQuestions() {
+async function carregaPreguntes() {
 
     const res = await fetch("./data/preguntes.json");
 
@@ -683,7 +683,7 @@ function rollDice() {
 /**
  * Gestiona l’event de la casella actual.
  */
-function event() {
+function gestionaEventCasella() {
 
     const t = equips[equipActiu];
 
@@ -693,7 +693,7 @@ function event() {
     // START
     if (type === "start") {
 
-        nextTurn();
+        seguentTorn();
 
         return;
     }
@@ -717,7 +717,7 @@ function event() {
 
         console.warn("Sense preguntes per:", type);
 
-        nextTurn();
+        seguentTorn();
 
         return;
     }
@@ -795,7 +795,7 @@ function showModal(data) {
 
             guardaPartida();
 
-            nextTurn();
+            seguentTorn();
         };
 
         ch.appendChild(b);
@@ -938,7 +938,7 @@ function unfair() {
 /**
  * Passa el torn al següent equip.
  */
-function nextTurn() {
+function seguentTorn() {
 
     equipActiu = (equipActiu + 1) % equips.length;
 
@@ -998,7 +998,7 @@ function moveStepByStep(equip, steps) {
             hoPintaTot();
 
             // Petit delay abans del modal
-            setTimeout(() => event(), 500);
+            setTimeout(() => gestionaEventCasella(), 500);
 
             return;
         }
@@ -1152,7 +1152,7 @@ function buildRandomTeams() {
     });
 
 
-    renderTeamsPreview();
+    pintaPreviewEquips();
 
     guardaEquips();
 }
@@ -1163,7 +1163,7 @@ function buildRandomTeams() {
  * Mostra els equips generats
  * a la pantalla inicial.
  */
-function renderTeamsPreview() {
+function pintaPreviewEquips() {
 
     const el = document.getElementById("teamsPreview");
 
@@ -1220,7 +1220,7 @@ function iniciaPartida() {
  */
 async function init() {
 
-    await loadQuestions();
+    await carregaPreguntes();
 
     await carregaAlumnes();
 
@@ -1258,7 +1258,7 @@ async function init() {
 
         equips = loadedTeams;
 
-        renderTeamsPreview();
+        pintaPreviewEquips();
 
         return;
     }
