@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Bassa Digital v2</title>
+    <link rel="stylesheet" href="./css/estil.css">
+</head>
+
+<body>
+    <div class="setup" id="setup">
+        <div class="setup-card">
+            <h2>La Bassa Digital</h2>
+            <div class="setup-grid">
+                <div>
+                    <label for="studentsInput"><strong>Alumnes</strong></label>
+                    <textarea id="studentsInput">Llegint llista ...</textarea>
+                </div>
+
+                <div>
+                    <label><strong>Equips generats</strong></label>
+                    <div id="teamsPreview"></div>
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+                <button id="shuffleBtn">
+                    Barrejar equips
+                </button>
+
+                <button id="clearTeamsBtn">
+                    Esborrar equips
+                </button>
+
+                <button id="resetGameBtn">
+                    Reiniciar partida
+                </button>
+
+                <button id="startBtn">
+                    Començar
+                </button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="app">
+        <h1>La Bassa Digital</h1>
+        <div class="layout">
+
+            <!-- MARCADOR -->
+            <div id="scores"></div>
+
+            <!-- JOC -->
+            <div class="game">
+
+                <div id="board" class="board"></div>
+
+            </div>
+
+        </div>
+
+        <!-- CONTROL FIX -->
+        <div class="panel-control">
+            <div id="turn"></div>
+            <div id="dice" class="dice">🎲</div>
+            <button class="primary" id="diceBtn">Tirar dau</button>
+            <br><br><br>
+            <hr>
+            <button class="secondary" id="resetGameBtn">Reiniciar</button>
+            <button class="secondary" id="fullResetGameBtn">Nous equips</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="modal">
+            <h2 id="title"></h2>
+            <div id="timer" class="timer"></div>
+            <p id="text"></p>
+            <div id="choices"></div>
+        </div>
+    </div>
+
+    <script src="./js/codi.js"></script>
+
+</body>
+
+</html>
