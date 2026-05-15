@@ -112,6 +112,9 @@ function pintaMarcador() {
 import Equip from "./core/Equip.js";
 import Partida from "./core/Partida.js";
 
+
+
+
 const partida = new Partida();
 
 partida.inici();
@@ -122,12 +125,12 @@ partida.inici();
 
 // Temps per defecte (en segons) del temporitzador
 // que apareix dins del modal de preguntes.
-const TEMPS_PER_DEFECTE = 10;
+// config.tempsPerTorn
 
 // Nombre de columnes del tauler.
 // IMPORTANT:
 // Ha de coincidir amb el valor definit al CSS.
-const columnesTaulell = 6;
+// config.columnesTaulell
 
 // Objecte utilitzat per recordar quines preguntes
 // ja han sortit durant la partida.
@@ -138,23 +141,12 @@ const preguntesFetes = {};
 // Variable global que contindrà tots els equips.
 let equips = [];
 
-
 // Tipus de caselles possibles del tauler.
 // Aquest array es reutilitza cíclicament.
-const tipus = [
-    "decisio",
-    "algoritme",
-    "trampa",
-    "pressio",
-    "viral",
-    "decisio",
-    "trampa",
-    "algoritme"
-];
-
+// config.tipusCaselles
 
 // Nombre total de caselles del tauler.
-const qtatTotalDeCaselles = 36;
+// config.casellesTotals
 
 const elements = {
     taulell: document.getElementById("board"),
@@ -189,13 +181,13 @@ document.getElementById("resetGameBtn")
     .addEventListener("click", resetGame);
 
 document.getElementById("diceBtn")
-    .addEventListener("click",rollDice)
+    .addEventListener("click", rollDice)
 
 document.getElementById("resetGameBtn")
-    .addEventListener("click",resetGame)
+    .addEventListener("click", resetGame)
 
 document.getElementById("fullResetGameBtn")
-    .addEventListener("click",reiniciComplet)
+    .addEventListener("click", reiniciComplet)
 
 
 // ======================================================
@@ -216,6 +208,11 @@ let interval;
 // des de preguntes.json
 let preguntes = {};
 
+let config = {};
+let tempsPerTorn;
+let columnesTaulell;
+let tipusCaselles;
+let casellesTotals;
 
 
 // ======================================================
@@ -226,19 +223,18 @@ let preguntes = {};
 // La primera casella és START.
 // L’última és FINAL.
 // La resta van alternant tipus.
-const taulell = [...Array(qtatTotalDeCaselles)].map((_, i) => {
+// const taulell = [...Array(casellesTotals)].map((_, i) => {
 
-    // Casella inicial
-    if (i === 0) return { type: "start" };
+//     // Casella inicial
+//     if (i === 0) return { type: "start" };
 
-    // Casella final
-    if (i === qtatTotalDeCaselles - 1) return { type: "final" };
+//     // Casella final
+//     if (i === casellesTotals - 1) return { type: "final" };
 
-    // Caselles normals
-    return { type: tipus[i % tipus.length] };
-});
-
-
+//     // Caselles normals
+//     return { type: tipusCaselles[i % tipusCaselles.length] };
+// });
+let taulell = [];
 
 // ======================================================
 // ALUMNES
@@ -363,7 +359,28 @@ function guardaEquips() {
     );
 }
 
+function creaTaulell() {
 
+    taulell = [...Array(casellesTotals)].map((_, i) => {
+
+        // Casella inicial
+        if (i === 0) {
+            return { type: "start" };
+        }
+
+        // Casella final
+        if (i === casellesTotals - 1) {
+            return { type: "final" };
+        }
+
+        // Caselles normals
+        return {
+            type: tipusCaselles[
+                i % tipusCaselles.length
+            ]
+        };
+    });
+}
 
 /**
  * Carrega equips guardats.
@@ -699,7 +716,19 @@ function gestionaEventCasella() {
 
     const t = equips[equipActiu];
 
-    const type = taulell[t.posicioTaulell].type;
+    const casellaActual = taulell[t.posicioTaulell];
+
+    if (!casellaActual) {
+
+        console.error(
+            "Casella inexistent:",
+            t.posicioTaulell
+        );
+
+        return;
+    }
+
+    const type = casellaActual.type;
 
 
     // START
@@ -862,9 +891,9 @@ function getRandomQuestion(type) {
  */
 function startTimer() {
 
-    let time = TEMPS_PER_DEFECTE;
+    let time = tempsPerTorn;
 
-    
+
     if (!elements.timer) return;
 
     clearInterval(interval);
@@ -884,7 +913,7 @@ function startTimer() {
             elements.timer.style.color = "orange";
 
 
-        // Temps crític
+            // Temps crític
         } else if (time > 0) {
 
             elements.timer.innerText = `⚠️ ${time}s`;
@@ -892,7 +921,7 @@ function startTimer() {
             elements.timer.style.color = "red";
 
 
-        // Temps esgotat
+            // Temps esgotat
         } else {
 
             elements.timer.innerText =
@@ -991,7 +1020,7 @@ function moveStepByStep(equip, steps) {
         // Final moviment
         if (
             count >= steps
-            || equip.posicioTaulell >= qtatTotalDeCaselles - 1
+            || equip.posicioTaulell >= casellesTotals - 1
         ) {
 
             clearInterval(move);
@@ -1172,8 +1201,8 @@ function pintaPreviewEquips() {
             </strong><br>
 
             ${equip.membresEq
-                .map(m => `${m.firstname} ${m.lastname}`)
-                .join(", ")}
+            .map(m => `${m.firstname} ${m.lastname}`)
+            .join(", ")}
         </div>
     `).join("");
 }
@@ -1211,15 +1240,24 @@ function iniciaPartida() {
 // INIT
 // ======================================================
 
+async function carregaConfiguracio() {
 
+    const res = await fetch("./data/config.json");
+
+    config = await res.json();
+    tempsPerTorn = config.tempsPerTorn;
+    columnesTaulell = config.columnesTaulell;
+    tipusCaselles = config.tipusCaselles;
+    casellesTotals = config.casellesTotals;
+}
 
 /**
  * Inicialització principal del sistema.
  */
 async function init() {
-
+    await carregaConfiguracio();
+    creaTaulell();
     await carregaPreguntes();
-
     await carregaAlumnes();
 
 
