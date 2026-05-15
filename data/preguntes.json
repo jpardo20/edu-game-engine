@@ -6,18 +6,18 @@
             "choices": [
                 {
                     "text": "La compartim perquè tothom ho està fent.",
-                    "pop": 3,
-                    "crit": -2
+                    "barra1": 3,
+                    "barra2": -2
                 },
                 {
                     "text": "No la compartim fins verificar-la.",
-                    "pop": -1,
-                    "crit": 3
+                    "barra1": -1,
+                    "barra2": 3
                 },
                 {
                     "text": "Fem broma sense compartir-la directament.",
-                    "pop": 1,
-                    "crit": -1
+                    "barra1": 1,
+                    "barra2": -1
                 }
             ]
         },
@@ -27,18 +27,18 @@
             "choices": [
                 {
                     "text": "El publiquem igualment.",
-                    "pop": 4,
-                    "crit": -3
+                    "barra1": 4,
+                    "barra2": -3
                 },
                 {
                     "text": "No el publiquem.",
-                    "pop": -1,
-                    "crit": 3
+                    "barra1": -1,
+                    "barra2": 3
                 },
                 {
                     "text": "El publiquem però sense noms.",
-                    "pop": 2,
-                    "crit": -2
+                    "barra1": 2,
+                    "barra2": -2
                 }
             ]
         },
@@ -48,18 +48,18 @@
             "choices": [
                 {
                     "text": "Comentem per fer gràcia.",
-                    "pop": 3,
-                    "crit": -2
+                    "barra1": 3,
+                    "barra2": -2
                 },
                 {
                     "text": "No comentem.",
-                    "pop": -1,
-                    "crit": 2
+                    "barra1": -1,
+                    "barra2": 2
                 },
                 {
                     "text": "Avisem la persona per privat.",
-                    "pop": -1,
-                    "crit": 4
+                    "barra1": -1,
+                    "barra2": 4
                 }
             ]
         },
@@ -69,18 +69,18 @@
             "choices": [
                 {
                     "text": "Hi participem per no quedar fora.",
-                    "pop": 3,
-                    "crit": -2
+                    "barra1": 3,
+                    "barra2": -2
                 },
                 {
                     "text": "El qüestionem públicament.",
-                    "pop": -2,
-                    "crit": 4
+                    "barra1": -2,
+                    "barra2": 4
                 },
                 {
                     "text": "Mirem sense participar.",
-                    "pop": 0,
-                    "crit": -1
+                    "barra1": 0,
+                    "barra2": -1
                 }
             ]
         }
@@ -92,18 +92,18 @@
             "choices": [
                 {
                     "text": "Ens ho creiem perquè encaixa amb nosaltres.",
-                    "pop": 2,
-                    "crit": -2
+                    "barra1": 2,
+                    "barra2": -2
                 },
                 {
                     "text": "Ho ignorem, però no ho qüestionem.",
-                    "pop": 0,
-                    "crit": 1
+                    "barra1": 0,
+                    "barra2": 1
                 },
                 {
                     "text": "Busquem una visió contrària abans d’opinar.",
-                    "pop": -1,
-                    "crit": 4
+                    "barra1": -1,
+                    "barra2": 4
                 }
             ]
         },
@@ -113,18 +113,18 @@
             "choices": [
                 {
                     "text": "Seguim mirant. És addictiu.",
-                    "pop": 3,
-                    "crit": -3
+                    "barra1": 3,
+                    "barra2": -3
                 },
                 {
                     "text": "Parem i ens preguntem per què ens ho mostra.",
-                    "pop": -1,
-                    "crit": 4
+                    "barra1": -1,
+                    "barra2": 4
                 },
                 {
                     "text": "Ho compartim al grup per comentar-ho.",
-                    "pop": 2,
-                    "crit": -1
+                    "barra1": 2,
+                    "barra2": -1
                 }
             ]
         },
@@ -134,18 +134,18 @@
             "choices": [
                 {
                     "text": "Assumim que és veritat.",
-                    "pop": 2,
-                    "crit": -2
+                    "barra1": 2,
+                    "barra2": -2
                 },
                 {
                     "text": "Recordem que el nostre feed no és el món real.",
-                    "pop": 0,
-                    "crit": 4
+                    "barra1": 0,
+                    "barra2": 4
                 },
                 {
                     "text": "Fem una enquesta ràpida als altres grups.",
-                    "pop": 1,
-                    "crit": 2
+                    "barra1": 1,
+                    "barra2": 2
                 }
             ]
         }
@@ -157,18 +157,18 @@
             "choices": [
                 {
                     "text": "Perquè és casualitat.",
-                    "pop": 2,
-                    "crit": -3
+                    "barra1": 2,
+                    "barra2": -3
                 },
                 {
                     "text": "Perquè el sistema ha après què ens reté.",
-                    "pop": 0,
-                    "crit": 4
+                    "barra1": 0,
+                    "barra2": 4
                 },
                 {
                     "text": "Perquè és el vídeo més popular.",
-                    "pop": 2,
-                    "crit": -1
+                    "barra1": 2,
+                    "barra2": -1
                 }
             ]
         },
@@ -178,18 +178,18 @@
             "choices": [
                 {
                     "text": "Hem decidit nosaltres quedar-nos.",
-                    "pop": 1,
-                    "crit": -1
+                    "barra1": 1,
+                    "barra2": -1
                 },
                 {
                     "text": "El disseny també ens ha empès a quedar-nos.",
-                    "pop": 0,
-                    "crit": 3
+                    "barra1": 0,
+                    "barra2": 3
                 },
                 {
                     "text": "No passa res, només era entreteniment.",
-                    "pop": 2,
-                    "crit": -1
+                    "barra1": 2,
+                    "barra2": -1
                 }
             ]
         },
@@ -199,18 +199,18 @@
             "choices": [
                 {
                     "text": "Jo faig servir la xarxa.",
-                    "pop": 2,
-                    "crit": -1
+                    "barra1": 2,
+                    "barra2": -1
                 },
                 {
                     "text": "La xarxa també em fa servir a mi.",
-                    "pop": 0,
-                    "crit": 4
+                    "barra1": 0,
+                    "barra2": 4
                 },
                 {
                     "text": "Depèn de si tinc molts likes.",
-                    "pop": 3,
-                    "crit": -1
+                    "barra1": 3,
+                    "barra2": -1
                 }
             ]
         }
@@ -222,18 +222,18 @@
             "choices": [
                 {
                     "text": "El defensem igualment.",
-                    "pop": -2,
-                    "crit": 4
+                    "barra1": -2,
+                    "barra2": 4
                 },
                 {
                     "text": "No fem res per no ficar-nos en problemes.",
-                    "pop": 2,
-                    "crit": -1
+                    "barra1": 2,
+                    "barra2": -1
                 },
                 {
                     "text": "Li escrivim en privat però públicament callem.",
-                    "pop": 0,
-                    "crit": 2
+                    "barra1": 0,
+                    "barra2": 2
                 }
             ]
         },
@@ -243,18 +243,18 @@
             "choices": [
                 {
                     "text": "Ens hi sumem per no quedar fora.",
-                    "pop": 3,
-                    "crit": -3
+                    "barra1": 3,
+                    "barra2": -3
                 },
                 {
                     "text": "Diem que no i ho argumentem.",
-                    "pop": -2,
-                    "crit": 4
+                    "barra1": -2,
+                    "barra2": 4
                 },
                 {
                     "text": "Canviem de tema sense posicionar-nos.",
-                    "pop": 0,
-                    "crit": -1
+                    "barra1": 0,
+                    "barra2": -1
                 }
             ]
         },
@@ -264,18 +264,18 @@
             "choices": [
                 {
                     "text": "La mirem i la reenviem.",
-                    "pop": 4,
-                    "crit": -4
+                    "barra1": 4,
+                    "barra2": -4
                 },
                 {
                     "text": "No la mirem i diem que no toca.",
-                    "pop": -2,
-                    "crit": 4
+                    "barra1": -2,
+                    "barra2": 4
                 },
                 {
                     "text": "La mirem però no la reenviem.",
-                    "pop": 1,
-                    "crit": -1
+                    "barra1": 1,
+                    "barra2": -1
                 }
             ]
         }
@@ -287,8 +287,8 @@
             "choices": [
                 {
                     "text": "Acceptar l’impuls viral.",
-                    "pop": 4,
-                    "crit": -1
+                    "barra1": 4,
+                    "barra2": -1
                 }
             ]
         },
@@ -298,13 +298,13 @@
             "choices": [
                 {
                     "text": "Aprofitar-ho per publicar més fort.",
-                    "pop": 3,
-                    "crit": -2
+                    "barra1": 3,
+                    "barra2": -2
                 },
                 {
                     "text": "Aprofitar-ho per enviar un missatge responsable.",
-                    "pop": 1,
-                    "crit": 3
+                    "barra1": 1,
+                    "barra2": 3
                 }
             ]
         }
@@ -316,8 +316,8 @@
             "choices": [
                 {
                     "text": "Tancar partida i veure resultats.",
-                    "pop": 0,
-                    "crit": 0,
+                    "barra1": 0,
+                    "barra2": 0,
                     "finish": true
                 }
             ]
