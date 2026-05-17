@@ -330,8 +330,11 @@ function moveStepByStep(equip, steps) {
                         () => {
 
                             gameState.quantitatDeTorns++;
-
-                            if (gameState.quantitatDeTorns % 3 === 0) {
+                            if (
+                                gameState.config.unfairSystem.enabled
+                                && gameState.quantitatDeTorns
+                                % gameState.config.unfairSystem.frequency === 0
+                            ) {
                                 unfair();
                             }
 
@@ -429,9 +432,11 @@ function unfair() {
     const sorted = [...gameState.equips]
         .sort((a, b) => b.barra1 - a.barra1);
 
-    sorted[0].barra1 += 2;
+    sorted[0].barra1 +=
+        gameState.config.unfairSystem.leaderBonus;
 
-    sorted[sorted.length - 1].barra1 -= 1;
+    sorted[sorted.length - 1].barra1 -=
+        gameState.config.unfairSystem.lastPenalty;
 }
 
 // ======================================================
@@ -581,7 +586,7 @@ async function carregaConfiguracio() {
     const res = await fetch("./data/config.json");
 
     config = await res.json();
-
+    gameState.config = config;
     tempsPerTorn = config.tempsPerTorn;
     columnesTaulell = config.columnesTaulell;
     tipusCaselles = config.tipusCaselles;

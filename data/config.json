@@ -1,20 +1,22 @@
 {
-  "titol": "La Bassa Digital",
-
-  "tempsPerTorn": 30,
-
-  "columnesTaulell": 6,
-
-  "casellesTotals": 36,
-
-  "tipusCaselles": [
-    "decisio",
-    "algoritme",
-    "trampa",
-    "pressio",
-    "viral",
-    "decisio",
-    "trampa",
-    "algoritme"
-  ]
+    "titol": "Joc de Preguntes",
+    "tempsPerTorn": 30,
+    "unfairSystem": {
+        "enabled": false,
+        "frequency": 3,
+        "leaderBonus": 2,
+        "lastPenalty": 1
+    },
+    "columnesTaulell": 6,
+    "casellesTotals": 36,
+    "tipusCaselles": [
+        "decisio",
+        "algoritme",
+        "trampa",
+        "pressio",
+        "viral",
+        "decisio",
+        "trampa",
+        "algoritme"
+    ]
 }
