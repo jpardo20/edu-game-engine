@@ -3,11 +3,13 @@ export function pintaMarcador(
     equips,
     equipActiu
 ) {
-    
+
     if (!elements.marcador) return;
 
     elements.marcador.innerHTML = equips.map(equip => {
+
         const isActive = equip === equips[equipActiu];
+
         return `
     <div class="score-row">
 
@@ -33,8 +35,11 @@ export function pintaMarcador(
         <div class="metric-info">
             <span 
                 class="metric-label viralitat tooltip"
-                data-tooltip="Mesura la capacitat del grup per captar atenció, generar impacte i influir dins les xarxes socials.">
-                Viralitat
+                data-tooltip="${window.gameState?.config?.scoreSystem?.tooltip?.[0]}">
+                ${
+    window.gameState?.config?.scoreSystem?.labels?.[0]
+    || "Barra 1"
+}
             </span>
 
           <span class="value ${equip.barra1 < 0 ? "neg" : "pos"}">
@@ -58,6 +63,10 @@ export function pintaMarcador(
 
       </div>
 
+      ${
+        window.gameState?.config?.scoreSystem?.bars === 2
+            ? `
+
       <!-- PENSAMENT CRÍTIC -->
 
       <div class="metric">
@@ -65,8 +74,11 @@ export function pintaMarcador(
         <div class="metric-info">
             <span 
                 class="metric-label crit tooltip"
-                data-tooltip="Mesura la capacitat del grup per detectar manipulacions, contrastar informació i prendre decisions reflexives.">
-                Pensament crític
+                data-tooltip="${window.gameState?.config?.scoreSystem?.tooltip?.[1]}">
+                ${
+    window.gameState?.config?.scoreSystem?.labels?.[1]
+    || "Barra 1"
+}
             </span>
 
           <span class="value ${equip.barra2 < 0 ? "neg" : "pos"}">
@@ -87,10 +99,15 @@ export function pintaMarcador(
           </div>
         </div>
 
+      </div>
+
+      `
+            : ""
+    }
+
         <span class="pos" style="float:right; font-size:0.9rem;">
           Casella ${equip.posicioTaulell}
         </span>
-      </div>
 
   </div>
 
