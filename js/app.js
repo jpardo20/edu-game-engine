@@ -649,12 +649,12 @@ function buildRandomTeams() {
         s => s.grup === "SMX"
     );
 
-    shuffle(dam);
-    shuffle(smx);
+    const damShuffled = shuffle(dam);
+    const smxShuffled = shuffle(smx);
 
     if (
-        dam.length < equips.length
-        || smx.length < equips.length
+        damShuffled.length < equips.length
+        || smxShuffled.length < equips.length
     ) {
 
         alert(
@@ -664,21 +664,21 @@ function buildRandomTeams() {
 
     equips.forEach((t, i) => {
 
-        if (dam[i]) {
-            t.membresEq.push(dam[i]);
+        if (damShuffled[i]) {
+            t.membresEq.push(damShuffled[i]);
         }
     });
 
     equips.forEach((t, i) => {
 
-        if (smx[i]) {
-            t.membresEq.push(smx[i]);
+        if (smxShuffled[i]) {
+            t.membresEq.push(smxShuffled[i]);
         }
     });
 
     const remaining = [
-        ...dam.slice(equips.length),
-        ...smx.slice(equips.length)
+        ...damShuffled.slice(equips.length),
+        ...smxShuffled.slice(equips.length)
     ];
 
     shuffle(remaining);
