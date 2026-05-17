@@ -120,6 +120,16 @@ function creaTaulell() {
     });
 }
 
+function getCategoryLabel(id) {
+
+    const found =
+        gameState.config.tipusCaselles
+            .find(t => t.id === id);
+
+    return found
+        ? found.label
+        : id;
+}
 
 // ======================================================
 // ALUMNES
@@ -589,7 +599,7 @@ async function carregaConfiguracio() {
     gameState.config = config;
     tempsPerTorn = config.tempsPerTorn;
     columnesTaulell = config.columnesTaulell;
-    tipusCaselles = config.tipusCaselles;
+    tipusCaselles = config.tipusCaselles.map(t => t.id);
     casellesTotals = config.casellesTotals;
 
     window.casellesTotals = casellesTotals;
@@ -664,5 +674,6 @@ window.columnesTaulell = columnesTaulell;
 window.pintaMarcador = pintaMarcador;
 window.gestionaEventCasella = gestionaEventCasella;
 window.guardaPartida = guardaPartida;
+window.getCategoryLabel = getCategoryLabel;
 
 init();
