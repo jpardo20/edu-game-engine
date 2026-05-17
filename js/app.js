@@ -2,6 +2,7 @@ import { pintaMarcador } from "./render/renderScoreboard.js";
 import { renderBoard } from "./render/renderBoard.js";
 // import { resetDice, rollDice, seguentTorn, shuffle, moveStepByStep } from "./core/gameEngine.js";
 import { resetDice, rollDice, shuffle } from "./core/gameEngine.js";
+import { gameState } from "./core/gameState.js";
 
 
 // ======================================================
@@ -29,7 +30,7 @@ partida.inici();
 
 const preguntesFetes = {};
 
-let equips = [];
+
 
 const elements = {
     taulell: document.getElementById("board"),
@@ -66,7 +67,7 @@ document.getElementById("diceBtn")
 
         rollDice(
             elements,
-            () => equips[equipActiu],
+            () => gameState.equips[gameState.equipActiu],
             moveStepByStep
         );
     });
@@ -79,8 +80,8 @@ document.getElementById("fullResetGameBtn")
 // VARIABLES GLOBALS D'ESTAT
 // ======================================================
 
-let equipActiu = 0;
-let quantitatDeTorns = 0;
+
+
 let interval;
 
 let preguntes = {};
@@ -168,9 +169,9 @@ function ompleTextarea() {
 function guardaPartida() {
 
     const data = {
-        equips,
-        active: equipActiu,
-        turns: quantitatDeTorns
+        equips: gameState.equips,
+        active: gameState.equipActiu,
+        turns: gameState.quantitatDeTorns
     };
 
     localStorage.setItem(
@@ -201,7 +202,7 @@ function guardaEquips() {
 
     localStorage.setItem(
         "bassaTeams",
-        JSON.stringify(equips)
+        JSON.stringify(gameState.equips)
     );
 }
 
@@ -228,10 +229,10 @@ function netejaSistema() {
     localStorage.removeItem("bassaTeams");
     localStorage.removeItem("bassaGame");
 
-    equips = [];
+    gameState.equips = [];
 
-    equipActiu = 0;
-    quantitatDeTorns = 0;
+    gameState.equipActiu = 0;
+    gameState.quantitatDeTorns = 0;
 
     elements.previewEquips.innerHTML = "";
 
@@ -239,7 +240,7 @@ function netejaSistema() {
         elements,
         taulell,
         equips,
-        equipActiu,
+        gameState.equipActiu,
         columnesTaulell,
         pintaMarcador
     );
@@ -251,10 +252,10 @@ function reiniciComplet() {
     localStorage.removeItem("bassaGame");
     localStorage.removeItem("bassaTeams");
 
-    equipActiu = 0;
-    quantitatDeTorns = 0;
+    gameState.equipActiu = 0;
+    gameState.quantitatDeTorns = 0;
 
-    equips.forEach(equip => {
+    gameState.equips.forEach(equip => {
 
         equip.posicioTaulell = 0;
         equip.barra1 = 0;
@@ -268,8 +269,8 @@ function reiniciComplet() {
     renderBoard(
         elements,
         taulell,
-        equips,
-        equipActiu,
+        gameState.equips,
+        gameState.equipActiu,
         columnesTaulell,
         pintaMarcador
     );
@@ -278,15 +279,15 @@ function reiniciComplet() {
 
 function resetGame() {
 
-    equips.forEach(equip => {
+    gameState.equips.forEach(equip => {
 
         equip.posicioTaulell = 0;
         equip.barra1 = 0;
         equip.barra2 = 0;
     });
 
-    equipActiu = 0;
-    quantitatDeTorns = 0;
+    gameState.equipActiu = 0;
+    gameState.quantitatDeTorns = 0;
 
     localStorage.removeItem("bassaGame");
 
@@ -295,8 +296,8 @@ function resetGame() {
     renderBoard(
         elements,
         taulell,
-        equips,
-        equipActiu,
+        gameState.equips,
+        gameState.equipActiu,
         columnesTaulell,
         pintaMarcador
     );
@@ -336,8 +337,8 @@ function moveStepByStep(equip, steps) {
             renderBoard(
                 elements,
                 taulell,
-                equips,
-                equipActiu,
+                gameState.equips,
+                gameState.equipActiu,
                 columnesTaulell,
                 pintaMarcador
             );
@@ -353,8 +354,8 @@ function moveStepByStep(equip, steps) {
         renderBoard(
             elements,
             taulell,
-            equips,
-            equipActiu,
+            gameState.equips,
+            gameState.equipActiu,
             columnesTaulell,
             pintaMarcador
         );
@@ -378,7 +379,7 @@ function moveStepByStep(equip, steps) {
 
 function gestionaEventCasella() {
 
-    const t = equips[equipActiu];
+    const t = gameState.equips[gameState.equipActiu];
 
     const casellaActual = taulell[t.posicioTaulell];
 
@@ -449,7 +450,7 @@ function showModal(data) {
 
         b.onclick = () => {
 
-            const t = equips[equipActiu];
+            const t = gameState.equips[gameState.equipActiu];
 
             t.barra1 += opt.barra1 || 0;
             t.barra2 += opt.barra2 || 0;
@@ -458,9 +459,9 @@ function showModal(data) {
 
             clearInterval(interval);
 
-            quantitatDeTorns++;
+            gameState.quantitatDeTorns++;
 
-            if (quantitatDeTorns % 3 === 0) {
+            if (gameState.quantitatDeTorns % 3 === 0) {
                 unfair();
             }
 
@@ -558,7 +559,7 @@ function startTimer() {
 
 function unfair() {
 
-    const sorted = [...equips]
+    const sorted = [...gameState.equips]
         .sort((a, b) => b.barra1 - a.barra1);
 
     sorted[0].barra1 += 2;
@@ -573,15 +574,15 @@ function unfair() {
 
 function seguentTorn() {
 
-    equipActiu = (equipActiu + 1) % equips.length;
+    gameState.equipActiu = (gameState.equipActiu + 1) % gameState.equips.length;
 
     elements.dau.innerText = "🎲";
 
     renderBoard(
         elements,
         taulell,
-        equips,
-        equipActiu,
+        gameState.equips,
+        gameState.equipActiu,
         columnesTaulell,
         pintaMarcador
     );
@@ -632,7 +633,7 @@ function buildRandomTeams() {
         "purple"
     ];
 
-    equips = names.map((n, i) => {
+    gameState.equips = names.map((n, i) => {
 
         const equip = new Equip(n);
 
@@ -653,8 +654,8 @@ function buildRandomTeams() {
     const smxShuffled = shuffle(smx);
 
     if (
-        damShuffled.length < equips.length
-        || smxShuffled.length < equips.length
+        damShuffled.length < gameState.equips.length
+        || smxShuffled.length < gameState.equips.length
     ) {
 
         alert(
@@ -662,14 +663,14 @@ function buildRandomTeams() {
         );
     }
 
-    equips.forEach((t, i) => {
+    gameState.equips.forEach((t, i) => {
 
         if (damShuffled[i]) {
             t.membresEq.push(damShuffled[i]);
         }
     });
 
-    equips.forEach((t, i) => {
+    gameState.equips.forEach((t, i) => {
 
         if (smxShuffled[i]) {
             t.membresEq.push(smxShuffled[i]);
@@ -677,15 +678,15 @@ function buildRandomTeams() {
     });
 
     const remaining = [
-        ...damShuffled.slice(equips.length),
-        ...smxShuffled.slice(equips.length)
+        ...damShuffled.slice(gameState.equips.length),
+        ...smxShuffled.slice(gameState.equips.length)
     ];
 
     shuffle(remaining);
 
     remaining.forEach((s, i) => {
 
-        equips[i % equips.length]
+        gameState.equips[i % gameState.equips.length]
             .membresEq.push(s);
     });
 
@@ -697,7 +698,7 @@ function buildRandomTeams() {
 
 function pintaPreviewEquips() {
 
-    elements.previewEquips.innerHTML = equips.map(equip => `
+    elements.previewEquips.innerHTML = gameState.equips.map(equip => `
         <div style="margin-bottom:10px">
             <strong style="color:${equip.color}">
                 ${equip.nomEq}
@@ -716,10 +717,10 @@ function iniciaPartida() {
     elements.setup
         .style.display = "none";
 
-    equipActiu = 0;
-    quantitatDeTorns = 0;
+    gameState.equipActiu = 0;
+    gameState.quantitatDeTorns = 0;
 
-    equips.forEach(t => {
+    gameState.equips.forEach(t => {
 
         t.posicioTaulell = 0;
         t.barra1 = 0;
@@ -729,8 +730,8 @@ function iniciaPartida() {
     renderBoard(
         elements,
         taulell,
-        equips,
-        equipActiu,
+        gameState.equips,
+        gameState.equipActiu,
         columnesTaulell,
         pintaMarcador
     );
@@ -772,11 +773,11 @@ async function init() {
 
     if (loadedGame) {
 
-        equips = loadedGame.equips;
+        gameState.equips = loadedGame.equips;
 
-        equipActiu = loadedGame.active;
+        gameState.equipActiu = loadedGame.active;
 
-        quantitatDeTorns = loadedGame.turns;
+        gameState.quantitatDeTorns = loadedGame.turns;
 
         elements.setup
             .style.display = "none";
@@ -784,8 +785,8 @@ async function init() {
         renderBoard(
             elements,
             taulell,
-            equips,
-            equipActiu,
+            gameState.equips,
+            gameState.equipActiu,
             columnesTaulell,
             pintaMarcador
         );
@@ -797,7 +798,7 @@ async function init() {
 
     if (loadedTeams) {
 
-        equips = loadedTeams;
+        gameState.equips = loadedTeams;
 
         pintaPreviewEquips();
 
@@ -809,8 +810,8 @@ async function init() {
     renderBoard(
         elements,
         taulell,
-        equips,
-        equipActiu,
+        gameState.equips,
+        gameState.equipActiu,
         columnesTaulell,
         pintaMarcador
     );
@@ -820,7 +821,6 @@ async function init() {
 // Inicialitzar aplicació
 
 window.elements = elements;
-window.equips = equips;
 // window.equipActiu = equipActiu;
 window.taulell = taulell;
 window.columnesTaulell = columnesTaulell;
