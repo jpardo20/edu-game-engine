@@ -1,5 +1,8 @@
-import {pintaMarcador} from "./render/renderScoreboard.js";
+import { pintaMarcador } from "./render/renderScoreboard.js";
 import { renderBoard } from "./render/renderBoard.js";
+// import { resetDice, rollDice, seguentTorn, shuffle, moveStepByStep } from "./core/gameEngine.js";
+import { resetDice, rollDice, shuffle } from "./core/gameEngine.js";
+
 
 // ======================================================
 // LA BASSA DIGITAL
@@ -40,6 +43,8 @@ const elements = {
     previewEquips: document.getElementById("teamsPreview")
 };
 
+
+
 // ======================================================
 // EVENTS DE BOTONS
 // ======================================================
@@ -57,7 +62,14 @@ document.getElementById("resetGameBtn")
     .addEventListener("click", resetGame);
 
 document.getElementById("diceBtn")
-    .addEventListener("click", rollDice);
+    .addEventListener("click", () => {
+
+        rollDice(
+            elements,
+            () => equips[equipActiu],
+            moveStepByStep
+        );
+    });
 
 document.getElementById("fullResetGameBtn")
     .addEventListener("click", reiniciComplet);
@@ -224,13 +236,13 @@ function netejaSistema() {
     elements.previewEquips.innerHTML = "";
 
     renderBoard(
-    elements,
-    taulell,
-    equips,
-    equipActiu,
-    columnesTaulell,
-    pintaMarcador
-);
+        elements,
+        taulell,
+        equips,
+        equipActiu,
+        columnesTaulell,
+        pintaMarcador
+    );
 }
 
 
@@ -254,13 +266,13 @@ function reiniciComplet() {
     pintaPreviewEquips();
 
     renderBoard(
-    elements,
-    taulell,
-    equips,
-    equipActiu,
-    columnesTaulell,
-    pintaMarcador
-);
+        elements,
+        taulell,
+        equips,
+        equipActiu,
+        columnesTaulell,
+        pintaMarcador
+    );
 }
 
 
@@ -281,13 +293,13 @@ function resetGame() {
     guardaEquips();
 
     renderBoard(
-    elements,
-    taulell,
-    equips,
-    equipActiu,
-    columnesTaulell,
-    pintaMarcador
-);
+        elements,
+        taulell,
+        equips,
+        equipActiu,
+        columnesTaulell,
+        pintaMarcador
+    );
 
     elements.setup.style.display = "none";
 }
@@ -309,23 +321,55 @@ async function carregaPreguntes() {
 // RENDER DEL TAULER
 // ======================================================
 
+function moveStepByStep(equip, steps) {
 
+    let count = 0;
+
+    const move = setInterval(() => {
+
+        if (
+            count >= steps
+            || equip.posicioTaulell >= casellesTotals - 1
+        ) {
+
+            clearInterval(move);
+            renderBoard(
+                elements,
+                taulell,
+                equips,
+                equipActiu,
+                columnesTaulell,
+                pintaMarcador
+            );
+
+            setTimeout(() => gestionaEventCasella(), 500);
+
+
+            return;
+        }
+
+        equip.posicioTaulell++;
+
+        renderBoard(
+            elements,
+            taulell,
+            equips,
+            equipActiu,
+            columnesTaulell,
+            pintaMarcador
+        );
+
+        count++;
+
+    }, 250);
+}
 
 
 // ======================================================
 // DAU
 // ======================================================
 
-function rollDice() {
 
-    const r = Math.floor(Math.random() * 6) + 1;
-
-    elements.dau.innerText = r;
-
-    const t = equips[equipActiu];
-
-    moveStepByStep(t, r);
-}
 
 
 // ======================================================
@@ -534,81 +578,27 @@ function seguentTorn() {
     elements.dau.innerText = "🎲";
 
     renderBoard(
-    elements,
-    taulell,
-    equips,
-    equipActiu,
-    columnesTaulell,
-    pintaMarcador
-);
+        elements,
+        taulell,
+        equips,
+        equipActiu,
+        columnesTaulell,
+        pintaMarcador
+    );
 
-    resetDice();
+    resetDice(elements);
 
     guardaPartida();
 }
 
 
-function resetDice() {
 
-    const d = elements.dau;
-
-    d.innerText = "🎲";
-
-    d.classList.add("reset");
-
-    setTimeout(
-        () => d.classList.remove("reset"),
-        200
-    );
-}
 
 
 // ======================================================
 // MOVIMENT ANIMAT
 // ======================================================
 
-function moveStepByStep(equip, steps) {
-
-    let count = 0;
-
-    const move = setInterval(() => {
-
-        if (
-            count >= steps
-            || equip.posicioTaulell >= casellesTotals - 1
-        ) {
-
-            clearInterval(move);
-
-            renderBoard(
-    elements,
-    taulell,
-    equips,
-    equipActiu,
-    columnesTaulell,
-    pintaMarcador
-);
-
-            setTimeout(() => gestionaEventCasella(), 500);
-
-            return;
-        }
-
-        equip.posicioTaulell++;
-
-        renderBoard(
-    elements,
-    taulell,
-    equips,
-    equipActiu,
-    columnesTaulell,
-    pintaMarcador
-);
-
-        count++;
-
-    }, 250);
-}
 
 
 // ======================================================
@@ -621,22 +611,7 @@ function getStudentsObjects() {
 }
 
 
-function shuffle(arr) {
 
-    const copy = [...arr];
-
-    for (let i = copy.length - 1; i > 0; i--) {
-
-        const j = Math.floor(
-            Math.random() * (i + 1)
-        );
-
-        [copy[i], copy[j]] =
-            [copy[j], copy[i]];
-    }
-
-    return copy;
-}
 
 
 function buildRandomTeams() {
@@ -752,13 +727,13 @@ function iniciaPartida() {
     });
 
     renderBoard(
-    elements,
-    taulell,
-    equips,
-    equipActiu,
-    columnesTaulell,
-    pintaMarcador
-);
+        elements,
+        taulell,
+        equips,
+        equipActiu,
+        columnesTaulell,
+        pintaMarcador
+    );
 
     guardaPartida();
 }
@@ -778,6 +753,8 @@ async function carregaConfiguracio() {
     columnesTaulell = config.columnesTaulell;
     tipusCaselles = config.tipusCaselles;
     casellesTotals = config.casellesTotals;
+
+    window.casellesTotals = casellesTotals;
 }
 
 
@@ -805,13 +782,13 @@ async function init() {
             .style.display = "none";
 
         renderBoard(
-    elements,
-    taulell,
-    equips,
-    equipActiu,
-    columnesTaulell,
-    pintaMarcador
-);
+            elements,
+            taulell,
+            equips,
+            equipActiu,
+            columnesTaulell,
+            pintaMarcador
+        );
 
         return;
     }
@@ -830,15 +807,25 @@ async function init() {
     buildRandomTeams();
 
     renderBoard(
-    elements,
-    taulell,
-    equips,
-    equipActiu,
-    columnesTaulell,
-    pintaMarcador
-);
+        elements,
+        taulell,
+        equips,
+        equipActiu,
+        columnesTaulell,
+        pintaMarcador
+    );
 }
 
 
 // Inicialitzar aplicació
+
+window.elements = elements;
+window.equips = equips;
+// window.equipActiu = equipActiu;
+window.taulell = taulell;
+window.columnesTaulell = columnesTaulell;
+window.pintaMarcador = pintaMarcador;
+window.gestionaEventCasella = gestionaEventCasella;
+window.guardaPartida = guardaPartida;
+
 init();
