@@ -4,6 +4,7 @@ import { resetDice, rollDice, shuffle } from "./core/gameEngine.js";
 import { gameState } from "./core/gameState.js";
 import { saveGame, loadGame, saveTeams, loadTeams } from "./core/persistence.js";
 import { showModal, startTimer } from "./core/modalService.js";
+import { seguentTorn, gestionaEventCasella } from "./core/gameController.js";
 
 // ======================================================
 // LA BASSA DIGITAL
@@ -314,7 +315,53 @@ function moveStepByStep(equip, steps) {
                 pintaMarcador
             );
 
-            setTimeout(() => gestionaEventCasella(), 500);
+            setTimeout(() => {
+
+                gestionaEventCasella(
+                    gameState,
+                    taulell,
+                    preguntes,
+                    getRandomQuestion,
+                    (data) => showModal(
+                        data,
+                        elements,
+                        gameState,
+                        () => startTimer(elements, tempsPerTorn),
+                        () => {
+
+                            gameState.quantitatDeTorns++;
+
+                            if (gameState.quantitatDeTorns % 3 === 0) {
+                                unfair();
+                            }
+
+                            guardaPartida();
+
+                            seguentTorn(
+                                gameState,
+                                elements,
+                                taulell,
+                                columnesTaulell,
+                                pintaMarcador,
+                                renderBoard,
+                                resetDice,
+                                guardaPartida
+                            );
+                        }
+                    ),
+                    () => seguentTorn(
+                        gameState,
+                        elements,
+                        taulell,
+                        columnesTaulell,
+                        pintaMarcador,
+                        renderBoard,
+                        resetDice,
+                        guardaPartida
+                    )
+                );
+
+            }, 500);
 
 
             return;
@@ -335,108 +382,6 @@ function moveStepByStep(equip, steps) {
 
     }, 250);
 }
-
-
-// ======================================================
-// DAU
-// ======================================================
-
-
-
-
-// ======================================================
-// EVENTS DE CASELLES
-// ======================================================
-
-function gestionaEventCasella() {
-
-    const t = gameState.equips[gameState.equipActiu];
-
-    const casellaActual = taulell[t.posicioTaulell];
-
-    if (!casellaActual) {
-
-        console.error(
-            "Casella inexistent:",
-            t.posicioTaulell
-        );
-
-        return;
-    }
-
-    const type = casellaActual.type;
-
-    if (type === "start") {
-
-        seguentTorn();
-
-        return;
-    }
-
-    if (type === "final") {
-
-        const finalQ = preguntes.final?.[0];
-
-        showModal(
-            finalQ,
-            elements,
-            gameState,
-            () => startTimer(elements, tempsPerTorn),
-            () => {
-
-                gameState.quantitatDeTorns++;
-
-                if (gameState.quantitatDeTorns % 3 === 0) {
-                    unfair();
-                }
-
-                guardaPartida();
-
-                seguentTorn();
-            }
-        );
-
-        return;
-    }
-
-    const pool = preguntes[type];
-
-    if (!pool || pool.length === 0) {
-
-        console.warn("Sense preguntes per:", type);
-
-        seguentTorn();
-
-        return;
-    }
-
-    const data = getRandomQuestion(type);
-
-    showModal(
-        data,
-        elements,
-        gameState,
-        () => startTimer(elements, tempsPerTorn),
-        () => {
-
-            gameState.quantitatDeTorns++;
-
-            if (gameState.quantitatDeTorns % 3 === 0) {
-                unfair();
-            }
-
-            guardaPartida();
-
-            seguentTorn();
-        }
-    );
-}
-
-
-// ======================================================
-// MODAL DE PREGUNTES
-// ======================================================
-
 
 
 
@@ -476,13 +421,6 @@ function getRandomQuestion(type) {
 
 
 // ======================================================
-// TIMER
-// ======================================================
-
-
-
-
-// ======================================================
 // SISTEMA INJUST
 // ======================================================
 
@@ -495,41 +433,6 @@ function unfair() {
 
     sorted[sorted.length - 1].barra1 -= 1;
 }
-
-
-// ======================================================
-// CANVI DE TORN
-// ======================================================
-
-function seguentTorn() {
-
-    gameState.equipActiu = (gameState.equipActiu + 1) % gameState.equips.length;
-
-    elements.dau.innerText = "🎲";
-
-    renderBoard(
-        elements,
-        taulell,
-        gameState.equips,
-        gameState.equipActiu,
-        columnesTaulell,
-        pintaMarcador
-    );
-
-    resetDice(elements);
-
-    guardaPartida();
-}
-
-
-
-
-
-// ======================================================
-// MOVIMENT ANIMAT
-// ======================================================
-
-
 
 // ======================================================
 // ALUMNES / EQUIPS
