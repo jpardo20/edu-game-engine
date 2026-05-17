@@ -1,5 +1,5 @@
 {
-    "decisio": [
+    "tipus01": [
         {
             "title": "Notícia impactant",
             "text": "Veieu una notícia molt bèstia sobre un company del centre. No sabeu si és certa, però ja s’està compartint molt.",
@@ -85,7 +85,7 @@
             ]
         }
     ],
-    "algoritme": [
+    "tipus02": [
         {
             "title": "El sistema us empeny",
             "text": "Durant aquest torn, l’algoritme només us mostra contingut que confirma el que ja penseu.",
@@ -150,7 +150,7 @@
             ]
         }
     ],
-    "trampa": [
+    "tipus03": [
         {
             "title": "Per què t’apareix això?",
             "text": "Us apareix un vídeo exactament sobre una inseguretat vostra. Per què creieu que us surt?",
@@ -215,7 +215,7 @@
             ]
         }
     ],
-    "pressio": [
+    "tipus04": [
         {
             "title": "Atac públic",
             "text": "Un company és atacat públicament. Defensar-lo us pot fer perdre popularitat.",
@@ -280,7 +280,7 @@
             ]
         }
     ],
-    "viral": [
+    "tipus05": [
         {
             "title": "Us feu virals",
             "text": "Un contingut vostre es dispara. L’algoritme us premia abans que pugueu pensar si era bona idea.",

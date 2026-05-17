@@ -1,5 +1,5 @@
 {
-    "titol": "Joc de Preguntes",
+    "titol": "Joc de preguntes per Itinerari personal per a l’ocupabilitat I",
     "tempsPerTorn": 30,
     "unfairSystem": {
         "enabled": false,
@@ -10,13 +10,14 @@
     "columnesTaulell": 6,
     "casellesTotals": 36,
     "tipusCaselles": [
-        "decisio",
-        "algoritme",
-        "trampa",
-        "pressio",
-        "viral",
-        "decisio",
-        "trampa",
-        "algoritme"
+        {"id": "tipus01", "label":"Entrevistes"},
+        {"id": "tipus02", "label":"Competències digitals"},
+        {"id": "tipus03", "label":"Xarxes socials"},
+        {"id": "tipus04", "label":"Treball en equip"},
+        {"id": "tipus05", "label":"Presa de decisions en context laboral"}
     ]
 }
+
+
+
+

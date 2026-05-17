@@ -93,7 +93,10 @@ export function renderBoard(
             casellaActual.type !== "start"
             && casellaActual.type !== "final"
         )
-            ? `<div class="cell-type">${casellaActual.type.toUpperCase()}</div>`
+            ? `<div class="cell-type">${window.getCategoryLabel
+                ? window.getCategoryLabel(casellaActual.type)
+                : casellaActual.type
+            }</div>`
             : "";
 
         const quiHiHaAqui = equips.some(
