@@ -7,17 +7,39 @@
         "leaderBonus": 2,
         "lastPenalty": 1
     },
+    "scoreSystem": {
+        "bars": 2,
+        "labels": [
+            "Viralitat",
+            "Pensament crític"]
+            ,
+        "tooltip": [
+            "Mesura la capacitat del grup per captar atenció, generar impacte i influir dins les xarxes socials.",
+            "Mesura la capacitat del grup per detectar manipulacions, contrastar informació i prendre decisions reflexives."
+        ]
+    },
     "columnesTaulell": 6,
     "casellesTotals": 36,
     "tipusCaselles": [
-        {"id": "tipus01", "label":"Entrevistes"},
-        {"id": "tipus02", "label":"Competències digitals"},
-        {"id": "tipus03", "label":"Xarxes socials"},
-        {"id": "tipus04", "label":"Treball en equip"},
-        {"id": "tipus05", "label":"Presa de decisions en context laboral"}
+        {
+            "id": "tipus01",
+            "label": "Entrevistes"
+        },
+        {
+            "id": "tipus02",
+            "label": "Competències digitals"
+        },
+        {
+            "id": "tipus03",
+            "label": "Xarxes socials"
+        },
+        {
+            "id": "tipus04",
+            "label": "Treball en equip"
+        },
+        {
+            "id": "tipus05",
+            "label": "Presa de decisions en context laboral"
+        }
     ]
 }
-
-
-
-
