@@ -43,6 +43,7 @@ const elements = {
     timer: document.getElementById("timer"),
     setup: document.getElementById("setup"),
     previewEquips: document.getElementById("teamsPreview")
+    
 };
 
 
@@ -675,5 +676,7 @@ window.pintaMarcador = pintaMarcador;
 window.gestionaEventCasella = gestionaEventCasella;
 window.guardaPartida = guardaPartida;
 window.getCategoryLabel = getCategoryLabel;
+
+window.gameState = gameState;
 
 init();
