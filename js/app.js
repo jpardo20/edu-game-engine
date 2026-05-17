@@ -3,7 +3,12 @@ import { renderBoard } from "./render/renderBoard.js";
 // import { resetDice, rollDice, seguentTorn, shuffle, moveStepByStep } from "./core/gameEngine.js";
 import { resetDice, rollDice, shuffle } from "./core/gameEngine.js";
 import { gameState } from "./core/gameState.js";
-
+import {
+    saveGame,
+    loadGame,
+    saveTeams,
+    loadTeams
+} from "./core/persistence.js";
 
 // ======================================================
 // LA BASSA DIGITAL
@@ -168,59 +173,30 @@ function ompleTextarea() {
 
 function guardaPartida() {
 
-    const data = {
+    saveGame({
         equips: gameState.equips,
         active: gameState.equipActiu,
         turns: gameState.quantitatDeTorns
-    };
-
-    localStorage.setItem(
-        "bassaGame",
-        JSON.stringify(data)
-    );
+    });
 }
 
 
 function carregaPartida() {
 
-    const data = localStorage.getItem("bassaGame");
+    return loadGame();
 
-    if (!data) return null;
-
-    try {
-
-        return JSON.parse(data);
-
-    } catch {
-
-        return null;
-    }
 }
 
 
 function guardaEquips() {
 
-    localStorage.setItem(
-        "bassaTeams",
-        JSON.stringify(gameState.equips)
-    );
+    saveTeams(gameState.equips);
 }
 
 
 function carregaEquips() {
 
-    const data = localStorage.getItem("bassaTeams");
-
-    if (!data) return null;
-
-    try {
-
-        return JSON.parse(data);
-
-    } catch {
-
-        return null;
-    }
+    return loadTeams();
 }
 
 
@@ -239,7 +215,7 @@ function netejaSistema() {
     renderBoard(
         elements,
         taulell,
-        equips,
+        gameState.equips,
         gameState.equipActiu,
         columnesTaulell,
         pintaMarcador
