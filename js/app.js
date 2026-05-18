@@ -243,7 +243,7 @@ async function init() {
     gameState.taulell = taulell;
 
     preguntes = await carregaPreguntes();
-    alumnesData = await carregaAlumnes();
+    alumnesData = []
 
     ompleTextarea(alumnesData);
 
