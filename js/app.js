@@ -69,8 +69,8 @@ function pintaPreviewEquips() {
                 ${equip.nomEq}
             </strong><br>
             ${equip.membresEq
-                .map(m => `${m.firstname} ${m.lastname}`)
-                .join(", ")}
+            .map(m => `${m.firstname} ${m.lastname}`)
+            .join(", ")}
         </div>
     `).join("");
 }
@@ -82,7 +82,9 @@ function renderGame() {
         gameState.equips,
         gameState.equipActiu,
         columnesTaulell,
-        pintaMarcador
+        pintaMarcador,
+        (id) => getCategoryLabel(id, gameState.config),
+        gameState.config
     );
 }
 
@@ -101,7 +103,9 @@ function finalitzaTorn() {
         pintaMarcador,
         renderBoard,
         resetDice,
-        () => guardaPartida(gameState)
+        () => guardaPartida(gameState),
+        (id) => getCategoryLabel(id, gameState.config),
+        gameState.config
     );
 }
 
@@ -256,16 +260,6 @@ async function init() {
     buildRandomTeams();
     renderGame();
 }
-
-// Compatibilitat amb renderScoreboard/renderBoard existents
-window.elements = elements;
-window.taulell = taulell;
-window.columnesTaulell = columnesTaulell;
-window.pintaMarcador = pintaMarcador;
-window.gestionaEventCasella = gestionaCasellaActual;
-window.guardaPartida = () => guardaPartida(gameState);
-window.getCategoryLabel = (id) => getCategoryLabel(id, gameState.config);
-window.gameState = gameState;
 
 configuraEvents();
 init();
