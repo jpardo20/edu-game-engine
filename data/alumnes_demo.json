@@ -1,13 +1,103 @@
 {
     "alumnes": [
         {
-            "firstname": "Nom alumne1",
-            "lastname": "Cognom alumne1",
+            "firstname": "Marc",
+            "lastname": "Soler",
             "grup": "SMX"
         },
         {
-            "firstname": "Nom alumne3",
-            "lastname": "Cognom alumne3",
+            "firstname": "Laia",
+            "lastname": "Pujol",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Nil",
+            "lastname": "Casas",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Júlia",
+            "lastname": "Roca",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Pol",
+            "lastname": "Navarro",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Clàudia",
+            "lastname": "Vidal",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Eric",
+            "lastname": "Martí",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Aina",
+            "lastname": "Serra",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Jan",
+            "lastname": "Costa",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Nora",
+            "lastname": "Ferré",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Hugo",
+            "lastname": "Gil",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Martina",
+            "lastname": "Ortega",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Adrià",
+            "lastname": "Ruiz",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Emma",
+            "lastname": "Campos",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Izan",
+            "lastname": "Molina",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Paula",
+            "lastname": "Lorenzo",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Àlex",
+            "lastname": "Cabrera",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Ivet",
+            "lastname": "Romero",
+            "grup": "DAM"
+        },
+        {
+            "firstname": "Joel",
+            "lastname": "Santos",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Lucia",
+            "lastname": "Prieto",
             "grup": "DAM"
         }
     ]
