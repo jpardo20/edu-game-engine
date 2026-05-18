@@ -6,7 +6,9 @@ export function seguentTorn(
     pintaMarcador,
     renderBoard,
     resetDice,
-    guardaPartida
+    guardaPartida,
+    getCategoryLabel,
+    config
 ) {
 
     gameState.equipActiu =
@@ -21,7 +23,9 @@ export function seguentTorn(
         gameState.equips,
         gameState.equipActiu,
         columnesTaulell,
-        pintaMarcador
+        pintaMarcador,
+        getCategoryLabel,
+        config
     );
 
     resetDice(elements);
