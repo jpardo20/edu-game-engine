@@ -1,84 +1,79 @@
-import { renderBoard } from "../render/renderBoard.js";
+import { rollDice } from "./dice.js";
+import { calculateNextPosition } from "./movement.js";
 
-export function resetDice(elements) {
+export function createGameEngine(state) {
 
-    const d = elements.dau;
+    return {
 
-    d.innerText = "🎲";
+        roll(sides = 6) {
+            return rollDice(sides);
+        },
 
-    d.classList.add("reset");
+        nextTurn() {
+            if (!state.equips.length) return;
 
-    setTimeout(
-        () => d.classList.remove("reset"),
-        200
-    );
-}
+            state.equipActiu =
+                (state.equipActiu + 1)
+                % state.equips.length;
+        },
 
-export function rollDice(
-    elements,
-    getCurrentTeam,
-    moveStepByStep
-) {
+        getCurrentPlayer() {
+            return state.equips[state.equipActiu] || null;
+        },
 
-    const r = Math.floor(Math.random() * 6) + 1;
+        movePlayer(player, steps, maxPosition) {
+            if (!player) return null;
 
-    elements.dau.innerText = r;
+            player.posicioTaulell = calculateNextPosition(
+                player.posicioTaulell,
+                steps,
+                maxPosition
+            );
 
-    const t = getCurrentTeam();
-    if (!t) return;
+            return player.posicioTaulell;
+        },
 
-    moveStepByStep(
-        t,
-        r,
-        window.casellesTotals,
-        () => renderBoard(
-            window.elements,
-            window.taulell,
-            equips,
-            equipActiu,
-            window.columnesTaulell,
-            window.pintaMarcador
-        ),
-        () => window.gestionaEventCasella()
-    );
-}
+        resetTeams() {
+            state.equipActiu = 0;
+            state.quantitatDeTorns = 0;
 
-export function seguentTorn() {
+            state.equips.forEach(equip => {
+                equip.posicioTaulell = 0;
+                equip.barra1 = 0;
+                equip.barra2 = 0;
+            });
+        },
 
-    window.equipActiu = (window.equipActiu + 1) % window.equips.length;
+        applyUnfairSystem() {
+            const unfairSystem = state.config?.unfairSystem;
 
-    window.elements.dau.innerText = "🎲";
+            if (
+                !unfairSystem?.enabled
+                || !state.equips.length
+                || state.quantitatDeTorns % unfairSystem.frequency !== 0
+            ) {
+                return;
+            }
 
-    renderBoard(
-        window.elements,
-        window.taulell,
-        window.equips,
-        window.equipActiu,
-        window.columnesTaulell,
-        window.pintaMarcador
-    );
+            const sorted = [...state.equips]
+                .sort((a, b) => b.barra1 - a.barra1);
 
-    resetDice(window.elements);
-
-    guardaPartida();
+            sorted[0].barra1 += unfairSystem.leaderBonus;
+            sorted[sorted.length - 1].barra1 -= unfairSystem.lastPenalty;
+        }
+    };
 }
 
 export function shuffle(arr) {
-
     const copy = [...arr];
 
     for (let i = copy.length - 1; i > 0; i--) {
-
         const j = Math.floor(
             Math.random() * (i + 1)
         );
 
-        [copy[i], copy[j]] =
-            [copy[j], copy[i]];
+        [copy[i], copy[j]] = [copy[j], copy[i]];
     }
 
     return copy;
 }
-
-
-
