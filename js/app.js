@@ -222,6 +222,17 @@ async function init() {
     const setup = await carregaConfiguracio();
 
     gameState.config = setup.config;
+    document.title = gameState.config.titol;
+
+    const titleEl1 = document.getElementById("gameTitle1");
+    const titleEl2 = document.getElementById("gameTitle2");
+
+    if (titleEl1) {
+        titleEl1.innerText = gameState.config.titol;
+    }
+    if (titleEl2) {
+        titleEl2.innerText = gameState.config.titol;
+    }
 
     tempsPerTorn = setup.tempsPerTorn;
     columnesTaulell = setup.columnesTaulell;
