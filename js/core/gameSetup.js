@@ -36,6 +36,30 @@ export async function carregaAlumnes() {
         return [];
     }
 }
+export async function carregaAlumnesDesDeFitxer(file) {
+
+    try {
+
+        const text = await file.text();
+
+        const data = JSON.parse(text);
+
+        if (!data.alumnes || !Array.isArray(data.alumnes)) {
+
+            throw new Error("El JSON no conté un array 'alumnes'");
+        }
+
+        return data.alumnes;
+
+    } catch (err) {
+
+        console.error("Error carregant fitxer d'alumnes:", err);
+
+        alert("Error carregant el fitxer JSON d'alumnes.");
+
+        return [];
+    }
+}
 
 export function ompleTextarea(alumnesData) {
 

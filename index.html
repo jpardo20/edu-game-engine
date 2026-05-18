@@ -14,9 +14,24 @@
             <h2 id="gameTitle1"></h2>
             <div class="setup-grid">
                 <div>
-                    <label for="studentsInput"><strong>Alumnes</strong></label>
-                    <textarea id="studentsInput">Llegint llista ...</textarea>
-                </div>
+<label for="studentsInput"><strong>Alumnes</strong></label>
+
+<div style="display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
+
+    <button id="importStudentsBtn" type="button">
+        Importar alumnes JSON
+    </button>
+
+    <input
+        type="file"
+        id="studentsFileInput"
+        accept=".json"
+        style="display:none;"
+    >
+
+</div>
+
+<textarea id="studentsInput">Llegint llista ...</textarea>                </div>
 
                 <div>
                     <label><strong>Equips generats</strong></label>

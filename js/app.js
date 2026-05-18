@@ -20,6 +20,7 @@ import {
     carregaConfiguracio,
     carregaPreguntes,
     carregaAlumnes,
+    carregaAlumnesDesDeFitxer,
     ompleTextarea
 } from "./core/gameSetup.js";
 
@@ -44,7 +45,9 @@ const elements = {
     choices: document.getElementById("choices"),
     timer: document.getElementById("timer"),
     setup: document.getElementById("setup"),
-    previewEquips: document.getElementById("teamsPreview")
+    previewEquips: document.getElementById("teamsPreview"),
+    importStudentsBtn: document.getElementById("importStudentsBtn"),
+    studentsFileInput: document.getElementById("studentsFileInput")
 };
 
 const partida = new Partida();
@@ -273,4 +276,31 @@ async function init() {
 }
 
 configuraEvents();
+
+elements.importStudentsBtn.addEventListener("click", () => {
+
+    elements.studentsFileInput.click();
+});
+
+elements.studentsFileInput.addEventListener("change", async (event) => {
+
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const nousAlumnes = await carregaAlumnesDesDeFitxer(file);
+
+    if (!nousAlumnes.length) return;
+
+    alumnesData = nousAlumnes;
+
+    ompleTextarea(alumnesData);
+
+    buildRandomTeams();
+
+    renderGame();
+
+    alert("Alumnes importats correctament.");
+});
+
 init();
