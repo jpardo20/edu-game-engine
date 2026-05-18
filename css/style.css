@@ -702,7 +702,7 @@ h1 {
 }
 
 .setup-card {
-    width: 900px;
+    width: min(1000px, 95%);
     max-width: 95%;
     padding: 28px;
     background: white;
@@ -822,4 +822,77 @@ h1 {
     transform:
         translateX(-50%)
         translateY(0);
+}
+
+
+/* =========================================================
+   SETUP ACTIONS
+========================================================= */
+
+.setup-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+
+.setup-actions-left,
+.setup-actions-right {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.setup-actions {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setup-actions button {
+    border: none;
+    border-radius: 14px;
+
+    padding: 14px 22px;
+
+    font-size: 1rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all .2s ease;
+
+    background: #ececec;
+    color: #111827;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.setup-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0,0,0,.12);
+}
+
+/* BOTÓ PRINCIPAL */
+
+#importStudentsBtn {
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    color: white;
+
+    box-shadow: 0 8px 20px rgba(37,99,235,.35);
+}
+
+#importStudentsBtn:hover {
+
+    transform: translateY(-3px) scale(1.02);
+
+    box-shadow: 0 14px 28px rgba(37,99,235,.45);
 }

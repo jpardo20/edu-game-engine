@@ -14,35 +14,40 @@
             <h2 id="gameTitle1"></h2>
             <div class="setup-grid">
                 <div>
-<label for="studentsInput"><strong>Alumnes</strong></label>
+                    <label for="studentsInput"><strong>Alumnes</strong></label>
 
-<div style="display:flex; gap:10px; margin-bottom:10px; flex-wrap:wrap;">
 
-    <button id="importStudentsBtn" type="button">
-        Importar alumnes JSON
-    </button>
 
-    <input
-        type="file"
-        id="studentsFileInput"
-        accept=".json"
-        style="display:none;"
-    >
-
-</div>
-
-<textarea id="studentsInput">Llegint llista ...</textarea>                </div>
+                    <textarea id="studentsInput">Llegint llista ...</textarea>
+                </div>
 
                 <div>
                     <label><strong>Equips generats</strong></label>
                     <div id="teamsPreview"></div>
                 </div>
             </div>
-            <div style="display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
-                <button id="shuffleBtn">Barrejar equips</button>
-                <button id="clearTeamsBtn">Esborrar equips</button>
-                <button id="resetGameBtn">Reiniciar partida</button>
-                <button id="startBtn">Començar</button>
+            <br>
+            <div class="setup-actions">
+
+                <div class="setup-actions-left">
+
+                    <button id="importStudentsBtn" type="button">
+                        Importar alumnes JSON
+                    </button>
+
+                    <input type="file" id="studentsFileInput" accept=".json" style="display:none;">
+
+                </div>
+
+                <div class="setup-actions-right">
+
+                    <button id="shuffleBtn">Barrejar equips</button>
+                    <button id="clearTeamsBtn">Esborrar equips</button>
+                    <button id="resetGameBtn">Reiniciar partida</button>
+                    <button id="startBtn">Començar</button>
+
+                </div>
+
             </div>
         </div>
     </div>
