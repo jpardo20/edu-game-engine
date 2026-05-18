@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="setup" id="setup">
+        <div class="setup-card">
+            <h2 id="gameTitle1"></h2>
+            <div class="setup-grid">
+                <div>
+                    <label for="studentsInput"><strong>Alumnes</strong></label>
+
+
+
+                    <textarea id="studentsInput">Llegint llista ...</textarea>
+                </div>
+
+                <div>
+                    <label><strong>Equips generats</strong></label>
+                    <div id="teamsPreview"></div>
+                </div>
+            </div>
+            <br>
+            <div class="setup-actions">
+
+                <div class="setup-actions-left">
+
+                    <button id="importStudentsBtn" type="button">
+                        Importar alumnes JSON
+                    </button>
+
+                    <input type="file" id="studentsFileInput" accept=".json" style="display:none;">
+
+                </div>
+
+                <div class="setup-actions-right">
+
+                    <button id="shuffleBtn">Barrejar equips</button>
+                    <button id="clearTeamsBtn">Esborrar equips</button>
+                    <button id="resetGameBtn">Reiniciar partida</button>
+                    <button id="startBtn">Començar</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="app">
+        <h1 id="gameTitle2"></h1>
+        <div class="layout">
+
+            <!-- MARCADOR -->
+            <div id="scores"></div>
+
+            <!-- JOC -->
+            <div class="game">
+
+                <div id="board" class="board"></div>
+
+            </div>
+
+        </div>
+
+        <!-- CONTROL FIX -->
+        <div class="panel-control">
+            <div id="turn"></div>
+            <div id="dice" class="dice">🎲</div>
+            <button class="primary" id="diceBtn">Tirar dau</button>
+            <br><br><br>
+            <hr>
+            <button class="secondary" id="resetCurrentGameBtn">Reiniciar</button>
+            <button class="secondary" id="fullResetGameBtn">Nous equips</button>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="modal">
+            <h2 id="title"></h2>
+            <div id="timer" class="timer"></div>
+            <p id="text"></p>
+            <div id="choices"></div>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+
+</html>
