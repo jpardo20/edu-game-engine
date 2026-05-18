@@ -4,7 +4,9 @@ export function renderBoard(
     equips,
     equipActiu,
     columnesTaulell,
-    pintaMarcador
+    pintaMarcador,
+    getCategoryLabel,
+    config
 ) {
 
     elements.taulell.innerHTML = "";
@@ -93,8 +95,8 @@ export function renderBoard(
             casellaActual.type !== "start"
             && casellaActual.type !== "final"
         )
-            ? `<div class="cell-type">${window.getCategoryLabel
-                ? window.getCategoryLabel(casellaActual.type)
+            ? `<div class="cell-type">${getCategoryLabel
+                ? getCategoryLabel(casellaActual.type)
                 : casellaActual.type
             }</div>`
             : "";
@@ -143,7 +145,8 @@ export function renderBoard(
     pintaMarcador(
         elements,
         equips,
-        equipActiu
+        equipActiu,
+        config
     );
 
 }

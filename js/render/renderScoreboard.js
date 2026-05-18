@@ -1,8 +1,9 @@
 export function pintaMarcador(
     elements,
     equips,
-    equipActiu
-) {
+    equipActiu,
+    config
+)   {
 
     if (!elements.marcador) return;
 
@@ -35,9 +36,9 @@ export function pintaMarcador(
         <div class="metric-info">
             <span 
                 class="metric-label viralitat tooltip"
-                data-tooltip="${window.gameState?.config?.scoreSystem?.tooltip?.[0]}">
+                data-tooltip="${config?.scoreSystem?.tooltip?.[0]}">
                 ${
-    window.gameState?.config?.scoreSystem?.labels?.[0]
+    config?.scoreSystem?.labels?.[0]
     || "Barra 1"
 }
             </span>
@@ -64,7 +65,7 @@ export function pintaMarcador(
       </div>
 
       ${
-        window.gameState?.config?.scoreSystem?.bars === 2
+        config?.scoreSystem?.bars === 2
             ? `
 
       <!-- PENSAMENT CRÍTIC -->
@@ -74,9 +75,9 @@ export function pintaMarcador(
         <div class="metric-info">
             <span 
                 class="metric-label crit tooltip"
-                data-tooltip="${window.gameState?.config?.scoreSystem?.tooltip?.[1]}">
+                data-tooltip="${config?.scoreSystem?.tooltip?.[1]}">
                 ${
-    window.gameState?.config?.scoreSystem?.labels?.[1]
+    config?.scoreSystem?.labels?.[1]
     || "Barra 1"
 }
             </span>
