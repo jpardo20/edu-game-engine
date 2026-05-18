@@ -1,326 +1,556 @@
 {
-    "tipus01": [
+  "tipus01": [
+    {
+      "title": "Preparació de l’entrevista",
+      "text": "Demà tens una entrevista de feina i encara no has buscat informació sobre l’empresa.",
+      "choices": [
         {
-            "title": "Notícia impactant",
-            "text": "Veieu una notícia molt bèstia sobre un company del centre. No sabeu si és certa, però ja s’està compartint molt.",
-            "choices": [
-                {
-                    "text": "La compartim perquè tothom ho està fent.",
-                    "barra1": 3,
-                    "barra2": -2
-                },
-                {
-                    "text": "No la compartim fins verificar-la.",
-                    "barra1": -1,
-                    "barra2": 3
-                },
-                {
-                    "text": "Fem broma sense compartir-la directament.",
-                    "barra1": 1,
-                    "barra2": -1
-                }
-            ]
+          "text": "Investigo l’empresa i preparo possibles preguntes.",
+          "barra1": 1
         },
         {
-            "title": "El vídeo que enganxa",
-            "text": "Teniu un vídeo polèmic que us pot donar molta visibilitat, però sabeu que pot fer mal a algú.",
-            "choices": [
-                {
-                    "text": "El publiquem igualment.",
-                    "barra1": 4,
-                    "barra2": -3
-                },
-                {
-                    "text": "No el publiquem.",
-                    "barra1": -1,
-                    "barra2": 3
-                },
-                {
-                    "text": "El publiquem però sense noms.",
-                    "barra1": 2,
-                    "barra2": -2
-                }
-            ]
+          "text": "Improviso totalment.",
+          "barra1": -1
         },
         {
-            "title": "Comentari fàcil",
-            "text": "Algú penja una foto ridícula. Un comentari vostre podria fer riure molta gent.",
-            "choices": [
-                {
-                    "text": "Comentem per fer gràcia.",
-                    "barra1": 3,
-                    "barra2": -2
-                },
-                {
-                    "text": "No comentem.",
-                    "barra1": -1,
-                    "barra2": 2
-                },
-                {
-                    "text": "Avisem la persona per privat.",
-                    "barra1": -1,
-                    "barra2": 4
-                }
-            ]
-        },
-        {
-            "title": "Trend del moment",
-            "text": "Surt un repte viral. Tothom l’està fent, però és humiliant per qui perd.",
-            "choices": [
-                {
-                    "text": "Hi participem per no quedar fora.",
-                    "barra1": 3,
-                    "barra2": -2
-                },
-                {
-                    "text": "El qüestionem públicament.",
-                    "barra1": -2,
-                    "barra2": 4
-                },
-                {
-                    "text": "Mirem sense participar.",
-                    "barra1": 0,
-                    "barra2": -1
-                }
-            ]
+          "text": "Pregunto a algú si sap alguna cosa ràpidament.",
+          "barra1": 0
         }
-    ],
-    "tipus02": [
+      ]
+    },
+    {
+      "title": "Arribar tard",
+      "text": "Hi ha molt trànsit i veus clar que arribaràs tard a l’entrevista.",
+      "choices": [
         {
-            "title": "El sistema us empeny",
-            "text": "Durant aquest torn, l’algoritme només us mostra contingut que confirma el que ja penseu.",
-            "choices": [
-                {
-                    "text": "Ens ho creiem perquè encaixa amb nosaltres.",
-                    "barra1": 2,
-                    "barra2": -2
-                },
-                {
-                    "text": "Ho ignorem, però no ho qüestionem.",
-                    "barra1": 0,
-                    "barra2": 1
-                },
-                {
-                    "text": "Busquem una visió contrària abans d’opinar.",
-                    "barra1": -1,
-                    "barra2": 4
-                }
-            ]
+          "text": "Aviso immediatament i explico la situació.",
+          "barra1": 1
         },
         {
-            "title": "Contingut extrem",
-            "text": "El sistema detecta que us quedeu més temps mirant conflictes. Ara us serveix contingut cada cop més radical.",
-            "choices": [
-                {
-                    "text": "Seguim mirant. És addictiu.",
-                    "barra1": 3,
-                    "barra2": -3
-                },
-                {
-                    "text": "Parem i ens preguntem per què ens ho mostra.",
-                    "barra1": -1,
-                    "barra2": 4
-                },
-                {
-                    "text": "Ho compartim al grup per comentar-ho.",
-                    "barra1": 2,
-                    "barra2": -1
-                }
-            ]
+          "text": "No aviso i arribo quan pugui.",
+          "barra1": -1
         },
         {
-            "title": "Cambra d’eco",
-            "text": "Totes les publicacions que veieu diuen el mateix. Sembla que tothom hi està d’acord.",
-            "choices": [
-                {
-                    "text": "Assumim que és veritat.",
-                    "barra1": 2,
-                    "barra2": -2
-                },
-                {
-                    "text": "Recordem que el nostre feed no és el món real.",
-                    "barra1": 0,
-                    "barra2": 4
-                },
-                {
-                    "text": "Fem una enquesta ràpida als altres grups.",
-                    "barra1": 1,
-                    "barra2": 2
-                }
-            ]
+          "text": "Invento una excusa falsa.",
+          "barra1": -1
         }
-    ],
-    "tipus03": [
+      ]
+    },
+    {
+      "title": "Pregunta difícil",
+      "text": "Et pregunten quin és el teu punt feble principal.",
+      "choices": [
         {
-            "title": "Per què t’apareix això?",
-            "text": "Us apareix un vídeo exactament sobre una inseguretat vostra. Per què creieu que us surt?",
-            "choices": [
-                {
-                    "text": "Perquè és casualitat.",
-                    "barra1": 2,
-                    "barra2": -3
-                },
-                {
-                    "text": "Perquè el sistema ha après què ens reté.",
-                    "barra1": 0,
-                    "barra2": 4
-                },
-                {
-                    "text": "Perquè és el vídeo més popular.",
-                    "barra1": 2,
-                    "barra2": -1
-                }
-            ]
+          "text": "Explico un punt feble i com intento millorar-lo.",
+          "barra1": 1
         },
         {
-            "title": "Qui decideix què veus?",
-            "text": "Obriu una xarxa social per descansar cinc minuts. Mitja hora després encara hi sou.",
-            "choices": [
-                {
-                    "text": "Hem decidit nosaltres quedar-nos.",
-                    "barra1": 1,
-                    "barra2": -1
-                },
-                {
-                    "text": "El disseny també ens ha empès a quedar-nos.",
-                    "barra1": 0,
-                    "barra2": 3
-                },
-                {
-                    "text": "No passa res, només era entreteniment.",
-                    "barra1": 2,
-                    "barra2": -1
-                }
-            ]
+          "text": "Dic que no tinc cap defecte.",
+          "barra1": -1
         },
         {
-            "title": "Pregunta incòmoda",
-            "text": "Quan comparteixes una cosa sense pensar, qui està fent servir a qui?",
-            "choices": [
-                {
-                    "text": "Jo faig servir la xarxa.",
-                    "barra1": 2,
-                    "barra2": -1
-                },
-                {
-                    "text": "La xarxa també em fa servir a mi.",
-                    "barra1": 0,
-                    "barra2": 4
-                },
-                {
-                    "text": "Depèn de si tinc molts likes.",
-                    "barra1": 3,
-                    "barra2": -1
-                }
-            ]
+          "text": "Canvio de tema.",
+          "barra1": -1
         }
-    ],
-    "tipus04": [
+      ]
+    },
+    {
+      "title": "Vestimenta",
+      "text": "No saps com vestir-te per una entrevista presencial.",
+      "choices": [
         {
-            "title": "Atac públic",
-            "text": "Un company és atacat públicament. Defensar-lo us pot fer perdre popularitat.",
-            "choices": [
-                {
-                    "text": "El defensem igualment.",
-                    "barra1": -2,
-                    "barra2": 4
-                },
-                {
-                    "text": "No fem res per no ficar-nos en problemes.",
-                    "barra1": 2,
-                    "barra2": -1
-                },
-                {
-                    "text": "Li escrivim en privat però públicament callem.",
-                    "barra1": 0,
-                    "barra2": 2
-                }
-            ]
+          "text": "Escullo roba neta i professional.",
+          "barra1": 1
         },
         {
-            "title": "El grup pressiona",
-            "text": "El vostre grup d’amics vol que us sumeu a una burla. Si no ho feu, us diran exagerats.",
-            "choices": [
-                {
-                    "text": "Ens hi sumem per no quedar fora.",
-                    "barra1": 3,
-                    "barra2": -3
-                },
-                {
-                    "text": "Diem que no i ho argumentem.",
-                    "barra1": -2,
-                    "barra2": 4
-                },
-                {
-                    "text": "Canviem de tema sense posicionar-nos.",
-                    "barra1": 0,
-                    "barra2": -1
-                }
-            ]
+          "text": "Vaig amb xandall perquè és còmode.",
+          "barra1": -1
         },
         {
-            "title": "Captura privada",
-            "text": "Algú comparteix una captura d’una conversa privada. Tothom la vol veure.",
-            "choices": [
-                {
-                    "text": "La mirem i la reenviem.",
-                    "barra1": 4,
-                    "barra2": -4
-                },
-                {
-                    "text": "No la mirem i diem que no toca.",
-                    "barra1": -2,
-                    "barra2": 4
-                },
-                {
-                    "text": "La mirem però no la reenviem.",
-                    "barra1": 1,
-                    "barra2": -1
-                }
-            ]
+          "text": "Vaig exactament igual que cada dia.",
+          "barra1": 0
         }
-    ],
-    "tipus05": [
+      ]
+    },
+    {
+      "title": "Primera impressió",
+      "text": "Comences l’entrevista i estàs nerviós.",
+      "choices": [
         {
-            "title": "Us feu virals",
-            "text": "Un contingut vostre es dispara. L’algoritme us premia abans que pugueu pensar si era bona idea.",
-            "choices": [
-                {
-                    "text": "Acceptar l’impuls viral.",
-                    "barra1": 4,
-                    "barra2": -1
-                }
-            ]
+          "text": "Intento mantenir contacte visual i actitud positiva.",
+          "barra1": 1
         },
         {
-            "title": "Likes en cadena",
-            "text": "Tot el que feu ara té més abast. La visibilitat us dona poder, però també responsabilitat.",
-            "choices": [
-                {
-                    "text": "Aprofitar-ho per publicar més fort.",
-                    "barra1": 3,
-                    "barra2": -2
-                },
-                {
-                    "text": "Aprofitar-ho per enviar un missatge responsable.",
-                    "barra1": 1,
-                    "barra2": 3
-                }
-            ]
-        }
-    ],
-    "final": [
+          "text": "Miro constantment el mòbil.",
+          "barra1": -1
+        },
         {
-            "title": "Final de la bassa",
-            "text": "Heu arribat al final. Però ara cal preguntar-se: qui ha sobreviscut millor? Qui ha estat més popular? Qui ha estat més lliure?",
-            "choices": [
-                {
-                    "text": "Tancar partida i veure resultats.",
-                    "barra1": 0,
-                    "barra2": 0,
-                    "finish": true
-                }
-            ]
+          "text": "Responc amb monosíl·labs.",
+          "barra1": -1
         }
-    ]
+      ]
+    },
+    {
+      "title": "Final de l’entrevista",
+      "text": "L’entrevista està acabant i et pregunten si tens dubtes.",
+      "choices": [
+        {
+          "text": "Faig alguna pregunta sobre la feina o l’empresa.",
+          "barra1": 1
+        },
+        {
+          "text": "Dic que no m’interessa saber res més.",
+          "barra1": -1
+        },
+        {
+          "text": "No dic res i marxo ràpidament.",
+          "barra1": -1
+        }
+      ]
+    }
+  ],
+
+  "tipus02": [
+    {
+      "title": "Contrasenya segura",
+      "text": "Has de crear una contrasenya per una plataforma de treball.",
+      "choices": [
+        {
+          "text": "Creo una contrasenya llarga i segura.",
+          "barra1": 1
+        },
+        {
+          "text": "Poso 1234 perquè és fàcil.",
+          "barra1": -1
+        },
+        {
+          "text": "Utilitzo el meu nom i any de naixement.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Correu sospitós",
+      "text": "Reps un correu estrany demanant dades personals.",
+      "choices": [
+        {
+          "text": "Verifico el remitent abans d’obrir res.",
+          "barra1": 1
+        },
+        {
+          "text": "Faig clic immediatament.",
+          "barra1": -1
+        },
+        {
+          "text": "Reenvio el correu a tothom.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Treball col·laboratiu",
+      "text": "El grup ha de compartir documents online.",
+      "choices": [
+        {
+          "text": "Utilitzem eines col·laboratives com Google Drive.",
+          "barra1": 1
+        },
+        {
+          "text": "Cada persona fa la seva part sense compartir res.",
+          "barra1": -1
+        },
+        {
+          "text": "Ens enviem fotos per WhatsApp.",
+          "barra1": 0
+        }
+      ]
+    },
+    {
+      "title": "Actualitzacions",
+      "text": "El teu ordinador demana actualitzar el sistema.",
+      "choices": [
+        {
+          "text": "Actualitzo per millorar seguretat i estabilitat.",
+          "barra1": 1
+        },
+        {
+          "text": "Ho ignoro sempre.",
+          "barra1": -1
+        },
+        {
+          "text": "Desactivo les actualitzacions.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Còpia de seguretat",
+      "text": "Tens documents importants del projecte final.",
+      "choices": [
+        {
+          "text": "Faig còpies de seguretat regularment.",
+          "barra1": 1
+        },
+        {
+          "text": "Confio que no passarà res.",
+          "barra1": -1
+        },
+        {
+          "text": "Només ho guardo en un USB vell.",
+          "barra1": 0
+        }
+      ]
+    },
+    {
+      "title": "Privacitat digital",
+      "text": "Un amic et demana la teva contrasenya.",
+      "choices": [
+        {
+          "text": "No comparteixo contrasenyes personals.",
+          "barra1": 1
+        },
+        {
+          "text": "Li dono perquè confio en ell.",
+          "barra1": -1
+        },
+        {
+          "text": "Li passo només una part.",
+          "barra1": -1
+        }
+      ]
+    }
+  ],
+
+  "tipus03": [
+    {
+      "title": "Publicació impulsiva",
+      "text": "Estàs enfadat i vols publicar una crítica molt dura a xarxes.",
+      "choices": [
+        {
+          "text": "Espero abans de publicar i reflexiono.",
+          "barra1": 1
+        },
+        {
+          "text": "Publico immediatament.",
+          "barra1": -1
+        },
+        {
+          "text": "Ho comparteixo amb insults.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Perfil professional",
+      "text": "Vols buscar feina a través d’internet.",
+      "choices": [
+        {
+          "text": "Creo un perfil professional a LinkedIn.",
+          "barra1": 1
+        },
+        {
+          "text": "Només utilitzo xarxes personals.",
+          "barra1": 0
+        },
+        {
+          "text": "No cuido gens la meva imatge online.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Fake news",
+      "text": "Veus una notícia impactant compartida moltes vegades.",
+      "choices": [
+        {
+          "text": "Comprovo la font abans de compartir.",
+          "barra1": 1
+        },
+        {
+          "text": "La comparteixo immediatament.",
+          "barra1": -1
+        },
+        {
+          "text": "Faig broma sense verificar-la.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Privacitat",
+      "text": "Una xarxa social et demana permisos excessius.",
+      "choices": [
+        {
+          "text": "Reviso la configuració de privacitat.",
+          "barra1": 1
+        },
+        {
+          "text": "Accepto tot sense mirar.",
+          "barra1": -1
+        },
+        {
+          "text": "Ho ignoro completament.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Comentaris ofensius",
+      "text": "Veus comentaris ofensius contra un company.",
+      "choices": [
+        {
+          "text": "Intento frenar la situació i donar suport.",
+          "barra1": 1
+        },
+        {
+          "text": "M’hi afegeixo per riure.",
+          "barra1": -1
+        },
+        {
+          "text": "Ho comparteixo en altres grups.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Petjada digital",
+      "text": "Una empresa revisarà el teu perfil públic.",
+      "choices": [
+        {
+          "text": "Reviso el contingut que tinc publicat.",
+          "barra1": 1
+        },
+        {
+          "text": "No m’importa gens què hi hagi.",
+          "barra1": -1
+        },
+        {
+          "text": "Borro només les últimes publicacions.",
+          "barra1": 0
+        }
+      ]
+    }
+  ],
+
+  "tipus04": [
+    {
+      "title": "Treball en grup",
+      "text": "Un membre del grup no participa gaire.",
+      "choices": [
+        {
+          "text": "Intentem ajudar-lo i repartir millor les tasques.",
+          "barra1": 1
+        },
+        {
+          "text": "L’ignorem completament.",
+          "barra1": -1
+        },
+        {
+          "text": "Fem la seva feina sense parlar-ne.",
+          "barra1": 0
+        }
+      ]
+    },
+    {
+      "title": "Conflicte d’equip",
+      "text": "Hi ha una discussió dins del grup.",
+      "choices": [
+        {
+          "text": "Intentem dialogar i trobar una solució.",
+          "barra1": 1
+        },
+        {
+          "text": "Cridem més fort.",
+          "barra1": -1
+        },
+        {
+          "text": "Marxo sense dir res.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Organització",
+      "text": "El grup té moltes tasques pendents.",
+      "choices": [
+        {
+          "text": "Organitzem tasques i terminis.",
+          "barra1": 1
+        },
+        {
+          "text": "Improvisem constantment.",
+          "barra1": -1
+        },
+        {
+          "text": "Esperem a última hora.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Participació",
+      "text": "Durant la reunió només parla una persona.",
+      "choices": [
+        {
+          "text": "Intentem que tothom participi.",
+          "barra1": 1
+        },
+        {
+          "text": "Deixem que decideixi tot sola.",
+          "barra1": -1
+        },
+        {
+          "text": "Ningú diu res.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Responsabilitat",
+      "text": "Tens una tasca assignada dins del grup.",
+      "choices": [
+        {
+          "text": "La faig dins del termini acordat.",
+          "barra1": 1
+        },
+        {
+          "text": "Espero que algú altre la faci.",
+          "barra1": -1
+        },
+        {
+          "text": "No aviso que no la podré fer.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Escolta activa",
+      "text": "Un company proposa una idea diferent.",
+      "choices": [
+        {
+          "text": "L’escolto i la valorem entre tots.",
+          "barra1": 1
+        },
+        {
+          "text": "La rebutjo immediatament.",
+          "barra1": -1
+        },
+        {
+          "text": "L’interrompo constantment.",
+          "barra1": -1
+        }
+      ]
+    }
+  ],
+
+  "tipus05": [
+    {
+      "title": "Dades personals",
+      "text": "Has de compartir informació d’un client.",
+      "choices": [
+        {
+          "text": "Només comparteixo la informació necessària.",
+          "barra1": 1
+        },
+        {
+          "text": "Comparteixo tot sense revisar.",
+          "barra1": -1
+        },
+        {
+          "text": "Envio dades per qualsevol canal.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Document confidencial",
+      "text": "Tens documents sensibles oberts a l’ordinador.",
+      "choices": [
+        {
+          "text": "Bloquejo l’ordinador quan marxo.",
+          "barra1": 1
+        },
+        {
+          "text": "El deixo obert sempre.",
+          "barra1": -1
+        },
+        {
+          "text": "No m’importa qui ho vegi.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Correu laboral",
+      "text": "Has d’enviar un correu amb dades importants.",
+      "choices": [
+        {
+          "text": "Reviso bé el destinatari abans d’enviar.",
+          "barra1": 1
+        },
+        {
+          "text": "L’envio ràpidament sense mirar.",
+          "barra1": -1
+        },
+        {
+          "text": "Reenvio dades a persones externes.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Conversa privada",
+      "text": "Escoltes informació personal d’un company.",
+      "choices": [
+        {
+          "text": "Respecto la seva privacitat.",
+          "barra1": 1
+        },
+        {
+          "text": "Ho explico a altres persones.",
+          "barra1": -1
+        },
+        {
+          "text": "Ho publico a xarxes.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Protecció de dades",
+      "text": "L’empresa et demana fer una formació de protecció de dades.",
+      "choices": [
+        {
+          "text": "La faig perquè és important.",
+          "barra1": 1
+        },
+        {
+          "text": "La ignoro completament.",
+          "barra1": -1
+        },
+        {
+          "text": "Faig trampes per acabar ràpid.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "USB desconegut",
+      "text": "Trobes un USB desconegut al centre de treball.",
+      "choices": [
+        {
+          "text": "L’entrego a la persona responsable.",
+          "barra1": 1
+        },
+        {
+          "text": "El connecto per curiositat.",
+          "barra1": -1
+        },
+        {
+          "text": "El comparteixo amb companys.",
+          "barra1": -1
+        }
+      ]
+    }
+  ]
 }
