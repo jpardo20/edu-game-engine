@@ -8,13 +8,13 @@
         "lastPenalty": 1
     },
     "scoreSystem": {
-        "bars": 2,
+        "bars": 1,
         "labels": [
-            "Viralitat",
+            "Puntuació",
             "Pensament crític"]
             ,
         "tooltip": [
-            "Mesura la capacitat del grup per captar atenció, generar impacte i influir dins les xarxes socials.",
+            "Puntació del grup.",
             "Mesura la capacitat del grup per detectar manipulacions, contrastar informació i prendre decisions reflexives."
         ]
     },
@@ -39,7 +39,7 @@
         },
         {
             "id": "tipus05",
-            "label": "Presa de decisions en context laboral"
+            "label": "PD en context laboral"
         }
     ]
 }
