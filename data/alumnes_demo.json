@@ -1,0 +1,14 @@
+{
+    "alumnes": [
+        {
+            "firstname": "Nom alumne1",
+            "lastname": "Cognom alumne1",
+            "grup": "SMX"
+        },
+        {
+            "firstname": "Nom alumne3",
+            "lastname": "Cognom alumne3",
+            "grup": "DAM"
+        }
+    ]
+}
