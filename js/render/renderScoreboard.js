@@ -63,15 +63,15 @@ export function pintaMarcador(
                     </div>
                     </div>
                     `: ""   }
-                    
+                    <div class="casella">Casella: <strong>${equip.posicioTaulell}</strong></div>
                     </div>
                     <div class="team-members-side">
                     ${equip.membresEq
                         .map(m => ` - ${m.firstname} ${m.lastname}`)
                         .join("<br>")}
-                        <p class="casella" style="font-size:0.9rem;">Casella ${equip.posicioTaulell}</p>
-                            </div>
-            </div>
+                        
+                        </div>
+                        </div>
         </div>
   `;
     }).join("");
