@@ -52,23 +52,26 @@ export function showModal(
     document.getElementById("text").innerText = data.text;
 
     elements.choices.innerHTML = "";
+    
+    const lletresRespostes = ["A", "B", "C", "D", "E", "F", "G"];
 
-    data.choices.forEach(opt => {
+    data.choices.forEach((resposta, index) => {
 
-        const b = document.createElement("button");
+        const botoResposta = document.createElement("button");
 
-        b.className = "choice";
-        b.innerText = opt.text;
+        botoResposta.className = "choice";
+        botoResposta.innerText =
+            `${lletresRespostes[index]}) ${resposta.text}`;
 
-        b.onclick = () => {
+        botoResposta.onclick = () => {
 
             const t =
                 gameState.equips[
                     gameState.equipActiu
                 ];
 
-            t.barra1 += opt.barra1 || 0;
-            t.barra2 += opt.barra2 || 0;
+            t.barra1 += resposta.barra1 || 0;
+            t.barra2 += resposta.barra2 || 0;
 
             elements.overlay.classList.remove("show");
 
@@ -77,7 +80,7 @@ export function showModal(
             onAnswer();
         };
 
-        elements.choices.appendChild(b);
+        elements.choices.appendChild(botoResposta);
     });
 
     startTimerCallback();
