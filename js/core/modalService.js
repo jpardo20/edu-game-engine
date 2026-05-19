@@ -13,24 +13,24 @@ export function startTimer(elements, tempsPerTorn) {
 
         time--;
 
-        if (time > 5) {
-
+        if (time > 10) {
             elements.timer.innerText =
-                `${time}s → decidiu`;
-
+                `⏱️ El temps passa volant ... → ${time} s.`;
             elements.timer.style.color = "orange";
 
-        } else if (time > 0) {
-
-            elements.timer.innerText = `⚠️ ${time}s`;
-
+        } else if (time > 5) {
+            elements.timer.innerText = `⏳ Aneu pensant en donar una resposta!! → ${time} s.`;
             elements.timer.style.color = "red";
-
+        }
+        else if (time > 0) {
+            elements.timer.innerText = `⚠️ Queda molt poc temps → ${time} s.`;
+            elements.timer.style.color = "red";
         } else {
-
-            elements.timer.innerText =
-                "Temps! Porta veu!";
-
+            elements.timer.innerHTML =
+                "<p style=\"line-height: 1.3rem; margin: 0px;\">☠️&nbsp;&nbsp;&nbsp;→&nbsp;0&nbsp;s.<br>Time over!! Portaveu cal donar una resposta!</p>";
+            elements.timer.style.color = "white";
+            elements.timer.style.backgroundColor = "red";
+            elements.timer.style.fontSize = "1.8rem";
             clearInterval(interval);
         }
 
@@ -52,7 +52,7 @@ export function showModal(
     document.getElementById("text").innerText = data.text;
 
     elements.choices.innerHTML = "";
-    
+
     const lletresRespostes = ["A", "B", "C", "D", "E", "F", "G"];
 
     data.choices.forEach((resposta, index) => {
@@ -67,7 +67,7 @@ export function showModal(
 
             const t =
                 gameState.equips[
-                    gameState.equipActiu
+                gameState.equipActiu
                 ];
 
             t.barra1 += resposta.barra1 || 0;
