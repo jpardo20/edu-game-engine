@@ -23,23 +23,23 @@
     "tipusCaselles": [
         {
             "id": "tipus01",
-            "label": "Entrevistes"
+            "label": "PRL"
         },
         {
             "id": "tipus02",
-            "label": "Competències digitals"
+            "label": "Relacions laborals"
         },
         {
             "id": "tipus03",
-            "label": "Xarxes socials"
+            "label": "Contractes"
         },
         {
             "id": "tipus04",
-            "label": "Treball en equip"
+            "label": "Conflictes col·lectius"
         },
         {
             "id": "tipus05",
-            "label": "PD en context laboral"
+            "label": "Curriculum"
         }
     ]
 }
