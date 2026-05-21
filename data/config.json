@@ -1,6 +1,6 @@
 {
     "titol": "Itinerari personal ocupabilitat I",
-    "tempsPerTorn": 30,
+    "tempsPerTorn": 10,
     "unfairSystem": {
         "enabled": false,
         "frequency": 3,
@@ -18,8 +18,8 @@
             "Mesura la capacitat del grup per detectar manipulacions, contrastar informació i prendre decisions reflexives."
         ]
     },
-    "columnesTaulell": 6,
-    "casellesTotals": 36,
+    "columnesTaulell": 7,
+    "casellesTotals": 23,
     "tipusCaselles": [
         {
             "id": "tipus01",

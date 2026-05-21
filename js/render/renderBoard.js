@@ -11,6 +11,9 @@ export function renderBoard(
 
     elements.taulell.innerHTML = "";
 
+    elements.taulell.style.gridTemplateColumns =
+        `repeat(${columnesTaulell}, 1fr)`;
+
     const filesTaulell = Math.ceil(taulell.length / columnesTaulell);
 
     let orderedIndexes = [];
