@@ -4,20 +4,24 @@ let interval;
 export function startTimer(elements, tempsPerTorn) {
 
     let time = tempsPerTorn;
-
+    
+    elements.timer.style.color = "orange";
+    
     if (!elements.timer) return;
+
+    // RESET visual del timer
+    elements.timer.style.color = "";
+    elements.timer.style.backgroundColor = "";
+    elements.timer.style.fontSize = "";
 
     clearInterval(interval);
 
     interval = setInterval(() => {
-
         time--;
-
         if (time > 10) {
             elements.timer.innerText =
                 `⏱️ El temps passa volant ... → ${time} s.`;
             elements.timer.style.color = "orange";
-
         } else if (time > 5) {
             elements.timer.innerText = `⏳ Aneu pensant en donar una resposta!! → ${time} s.`;
             elements.timer.style.color = "red";
@@ -33,7 +37,6 @@ export function startTimer(elements, tempsPerTorn) {
             elements.timer.style.fontSize = "1.8rem";
             clearInterval(interval);
         }
-
     }, 1000);
 }
 
