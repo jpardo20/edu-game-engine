@@ -63,7 +63,8 @@ textarea {
 ========================================================= */
 
 .app {
-    max-width: 1400px;
+    width: 100%;
+    max-width: 1900px;
     margin: auto;
     padding: 20px;
 }
@@ -77,13 +78,14 @@ h1 {
 
 .layout {
     display: flex;
+    flex: 1;
     gap: 24px;
     align-items: flex-start;
 }
 
 .game {
     position: relative;
-    z-index: 1;
+   
 
     flex: 1;
     display: flex;
@@ -343,12 +345,13 @@ h1 {
 ========================================================= */
 
 .panel-control {
-    position: fixed;
-
+    
     top: 20px;
-    right: 20px;
-
-    width: 200px;
+    
+    
+    width: 220px;
+    flex-shrink: 0;
+    position: sticky;
 
     z-index: 100;
 
