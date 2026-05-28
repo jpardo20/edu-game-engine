@@ -1,0 +1,556 @@
+{
+  "tipus01": [
+    {
+      "title": "Preparació de l’entrevista",
+      "text": "Demà tens una entrevista de feina i encara no has buscat informació sobre l’empresa.",
+      "choices": [
+        {
+          "text": "Investigo l’empresa i preparo possibles preguntes.",
+          "barra1": 1
+        },
+        {
+          "text": "Improviso totalment.",
+          "barra1": -1
+        },
+        {
+          "text": "Pregunto a algú si sap alguna cosa ràpidament.",
+          "barra1": 0
+        }
+      ]
+    },
+    {
+      "title": "Arribar tard",
+      "text": "Hi ha molt trànsit i veus clar que arribaràs tard a l’entrevista.",
+      "choices": [
+        {
+          "text": "Aviso immediatament i explico la situació.",
+          "barra1": 1
+        },
+        {
+          "text": "No aviso i arribo quan pugui.",
+          "barra1": -1
+        },
+        {
+          "text": "Invento una excusa falsa.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Pregunta difícil",
+      "text": "Et pregunten quin és el teu punt feble principal.",
+      "choices": [
+        {
+          "text": "Explico un punt feble i com intento millorar-lo.",
+          "barra1": 1
+        },
+        {
+          "text": "Dic que no tinc cap defecte.",
+          "barra1": -1
+        },
+        {
+          "text": "Canvio de tema.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Vestimenta",
+      "text": "No saps com vestir-te per una entrevista presencial.",
+      "choices": [
+        {
+          "text": "Escullo roba neta i professional.",
+          "barra1": 1
+        },
+        {
+          "text": "Vaig amb xandall perquè és còmode.",
+          "barra1": -1
+        },
+        {
+          "text": "Vaig exactament igual que cada dia.",
+          "barra1": 0
+        }
+      ]
+    },
+    {
+      "title": "Primera impressió",
+      "text": "Comences l’entrevista i estàs nerviós.",
+      "choices": [
+        {
+          "text": "Intento mantenir contacte visual i actitud positiva.",
+          "barra1": 1
+        },
+        {
+          "text": "Miro constantment el mòbil.",
+          "barra1": -1
+        },
+        {
+          "text": "Responc amb monosíl·labs.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Final de l’entrevista",
+      "text": "L’entrevista està acabant i et pregunten si tens dubtes.",
+      "choices": [
+        {
+          "text": "Faig alguna pregunta sobre la feina o l’empresa.",
+          "barra1": 1
+        },
+        {
+          "text": "Dic que no m’interessa saber res més.",
+          "barra1": -1
+        },
+        {
+          "text": "No dic res i marxo ràpidament.",
+          "barra1": -1
+        }
+      ]
+    }
+  ],
+
+  "tipus02": [
+    {
+      "title": "Contrasenya segura",
+      "text": "Has de crear una contrasenya per una plataforma de treball.",
+      "choices": [
+        {
+          "text": "Creo una contrasenya llarga i segura.",
+          "barra1": 1
+        },
+        {
+          "text": "Poso 1234 perquè és fàcil.",
+          "barra1": -1
+        },
+        {
+          "text": "Utilitzo el meu nom i any de naixement.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Correu sospitós",
+      "text": "Reps un correu estrany demanant dades personals.",
+      "choices": [
+        {
+          "text": "Verifico el remitent abans d’obrir res.",
+          "barra1": 1
+        },
+        {
+          "text": "Faig clic immediatament.",
+          "barra1": -1
+        },
+        {
+          "text": "Reenvio el correu a tothom.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Treball col·laboratiu",
+      "text": "El grup ha de compartir documents online.",
+      "choices": [
+        {
+          "text": "Utilitzem eines col·laboratives com Google Drive.",
+          "barra1": 1
+        },
+        {
+          "text": "Cada persona fa la seva part sense compartir res.",
+          "barra1": -1
+        },
+        {
+          "text": "Ens enviem fotos per WhatsApp.",
+          "barra1": 0
+        }
+      ]
+    },
+    {
+      "title": "Actualitzacions",
+      "text": "El teu ordinador demana actualitzar el sistema.",
+      "choices": [
+        {
+          "text": "Actualitzo per millorar seguretat i estabilitat.",
+          "barra1": 1
+        },
+        {
+          "text": "Ho ignoro sempre.",
+          "barra1": -1
+        },
+        {
+          "text": "Desactivo les actualitzacions.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Còpia de seguretat",
+      "text": "Tens documents importants del projecte final.",
+      "choices": [
+        {
+          "text": "Faig còpies de seguretat regularment.",
+          "barra1": 1
+        },
+        {
+          "text": "Confio que no passarà res.",
+          "barra1": -1
+        },
+        {
+          "text": "Només ho guardo en un USB vell.",
+          "barra1": 0
+        }
+      ]
+    },
+    {
+      "title": "Privacitat digital",
+      "text": "Un amic et demana la teva contrasenya.",
+      "choices": [
+        {
+          "text": "No comparteixo contrasenyes personals.",
+          "barra1": 1
+        },
+        {
+          "text": "Li dono perquè confio en ell.",
+          "barra1": -1
+        },
+        {
+          "text": "Li passo només una part.",
+          "barra1": -1
+        }
+      ]
+    }
+  ],
+
+  "tipus03": [
+    {
+      "title": "Publicació impulsiva",
+      "text": "Estàs enfadat i vols publicar una crítica molt dura a xarxes.",
+      "choices": [
+        {
+          "text": "Espero abans de publicar i reflexiono.",
+          "barra1": 1
+        },
+        {
+          "text": "Publico immediatament.",
+          "barra1": -1
+        },
+        {
+          "text": "Ho comparteixo amb insults.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Perfil professional",
+      "text": "Vols buscar feina a través d’internet.",
+      "choices": [
+        {
+          "text": "Creo un perfil professional a LinkedIn.",
+          "barra1": 1
+        },
+        {
+          "text": "Només utilitzo xarxes personals.",
+          "barra1": 0
+        },
+        {
+          "text": "No cuido gens la meva imatge online.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Fake news",
+      "text": "Veus una notícia impactant compartida moltes vegades.",
+      "choices": [
+        {
+          "text": "Comprovo la font abans de compartir.",
+          "barra1": 1
+        },
+        {
+          "text": "La comparteixo immediatament.",
+          "barra1": -1
+        },
+        {
+          "text": "Faig broma sense verificar-la.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Privacitat",
+      "text": "Una xarxa social et demana permisos excessius.",
+      "choices": [
+        {
+          "text": "Reviso la configuració de privacitat.",
+          "barra1": 1
+        },
+        {
+          "text": "Accepto tot sense mirar.",
+          "barra1": -1
+        },
+        {
+          "text": "Ho ignoro completament.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Comentaris ofensius",
+      "text": "Veus comentaris ofensius contra un company.",
+      "choices": [
+        {
+          "text": "Intento frenar la situació i donar suport.",
+          "barra1": 1
+        },
+        {
+          "text": "M’hi afegeixo per riure.",
+          "barra1": -1
+        },
+        {
+          "text": "Ho comparteixo en altres grups.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Petjada digital",
+      "text": "Una empresa revisarà el teu perfil públic.",
+      "choices": [
+        {
+          "text": "Reviso el contingut que tinc publicat.",
+          "barra1": 1
+        },
+        {
+          "text": "No m’importa gens què hi hagi.",
+          "barra1": -1
+        },
+        {
+          "text": "Borro només les últimes publicacions.",
+          "barra1": 0
+        }
+      ]
+    }
+  ],
+
+  "tipus04": [
+    {
+      "title": "Treball en grup",
+      "text": "Un membre del grup no participa gaire.",
+      "choices": [
+        {
+          "text": "Intentem ajudar-lo i repartir millor les tasques.",
+          "barra1": 1
+        },
+        {
+          "text": "L’ignorem completament.",
+          "barra1": -1
+        },
+        {
+          "text": "Fem la seva feina sense parlar-ne.",
+          "barra1": 0
+        }
+      ]
+    },
+    {
+      "title": "Conflicte d’equip",
+      "text": "Hi ha una discussió dins del grup.",
+      "choices": [
+        {
+          "text": "Intentem dialogar i trobar una solució.",
+          "barra1": 1
+        },
+        {
+          "text": "Cridem més fort.",
+          "barra1": -1
+        },
+        {
+          "text": "Marxo sense dir res.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Organització",
+      "text": "El grup té moltes tasques pendents.",
+      "choices": [
+        {
+          "text": "Organitzem tasques i terminis.",
+          "barra1": 1
+        },
+        {
+          "text": "Improvisem constantment.",
+          "barra1": -1
+        },
+        {
+          "text": "Esperem a última hora.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Participació",
+      "text": "Durant la reunió només parla una persona.",
+      "choices": [
+        {
+          "text": "Intentem que tothom participi.",
+          "barra1": 1
+        },
+        {
+          "text": "Deixem que decideixi tot sola.",
+          "barra1": -1
+        },
+        {
+          "text": "Ningú diu res.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Responsabilitat",
+      "text": "Tens una tasca assignada dins del grup.",
+      "choices": [
+        {
+          "text": "La faig dins del termini acordat.",
+          "barra1": 1
+        },
+        {
+          "text": "Espero que algú altre la faci.",
+          "barra1": -1
+        },
+        {
+          "text": "No aviso que no la podré fer.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Escolta activa",
+      "text": "Un company proposa una idea diferent.",
+      "choices": [
+        {
+          "text": "L’escolto i la valorem entre tots.",
+          "barra1": 1
+        },
+        {
+          "text": "La rebutjo immediatament.",
+          "barra1": -1
+        },
+        {
+          "text": "L’interrompo constantment.",
+          "barra1": -1
+        }
+      ]
+    }
+  ],
+
+  "tipus05": [
+    {
+      "title": "Dades personals",
+      "text": "Has de compartir informació d’un client.",
+      "choices": [
+        {
+          "text": "Només comparteixo la informació necessària.",
+          "barra1": 1
+        },
+        {
+          "text": "Comparteixo tot sense revisar.",
+          "barra1": -1
+        },
+        {
+          "text": "Envio dades per qualsevol canal.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Document confidencial",
+      "text": "Tens documents sensibles oberts a l’ordinador.",
+      "choices": [
+        {
+          "text": "Bloquejo l’ordinador quan marxo.",
+          "barra1": 1
+        },
+        {
+          "text": "El deixo obert sempre.",
+          "barra1": -1
+        },
+        {
+          "text": "No m’importa qui ho vegi.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Correu laboral",
+      "text": "Has d’enviar un correu amb dades importants.",
+      "choices": [
+        {
+          "text": "Reviso bé el destinatari abans d’enviar.",
+          "barra1": 1
+        },
+        {
+          "text": "L’envio ràpidament sense mirar.",
+          "barra1": -1
+        },
+        {
+          "text": "Reenvio dades a persones externes.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Conversa privada",
+      "text": "Escoltes informació personal d’un company.",
+      "choices": [
+        {
+          "text": "Respecto la seva privacitat.",
+          "barra1": 1
+        },
+        {
+          "text": "Ho explico a altres persones.",
+          "barra1": -1
+        },
+        {
+          "text": "Ho publico a xarxes.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "Protecció de dades",
+      "text": "L’empresa et demana fer una formació de protecció de dades.",
+      "choices": [
+        {
+          "text": "La faig perquè és important.",
+          "barra1": 1
+        },
+        {
+          "text": "La ignoro completament.",
+          "barra1": -1
+        },
+        {
+          "text": "Faig trampes per acabar ràpid.",
+          "barra1": -1
+        }
+      ]
+    },
+    {
+      "title": "USB desconegut",
+      "text": "Trobes un USB desconegut al centre de treball.",
+      "choices": [
+        {
+          "text": "L’entrego a la persona responsable.",
+          "barra1": 1
+        },
+        {
+          "text": "El connecto per curiositat.",
+          "barra1": -1
+        },
+        {
+          "text": "El comparteixo amb companys.",
+          "barra1": -1
+        }
+      ]
+    }
+  ]
+}
