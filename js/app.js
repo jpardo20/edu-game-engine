@@ -8,6 +8,15 @@ import { seguentTorn, gestionaEventCasella } from "./core/gameController.js";
 import { showModal, startTimer } from "./core/modalService.js";
 
 import {
+    carregaConfiguracio,
+    carregaPreguntes,
+    carregaAlumnes,
+    carregaAlumnesDemo,
+    carregaAlumnesDesDeFitxer,
+    ompleTextarea
+} from "./core/gameSetup.js";
+
+import {
     carregaPartida,
     guardaPartida,
     carregaEquips,
@@ -15,14 +24,6 @@ import {
     eliminaPartida,
     eliminaEquips
 } from "./core/gamePersistence.js";
-
-import {
-    carregaConfiguracio,
-    carregaPreguntes,
-    carregaAlumnes,
-    carregaAlumnesDesDeFitxer,
-    ompleTextarea
-} from "./core/gameSetup.js";
 
 import { creaTaulell, getCategoryLabel } from "./core/boardFactory.js";
 import { createQuestionManager } from "./core/questions.js";
@@ -246,8 +247,7 @@ async function init() {
     gameState.taulell = taulell;
 
     preguntes = await carregaPreguntes();
-    alumnesData = []
-
+    alumnesData = await carregaAlumnesDemo();
     ompleTextarea(alumnesData);
 
     const loadedGame = carregaPartida();
