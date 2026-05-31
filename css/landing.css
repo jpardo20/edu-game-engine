@@ -1,0 +1,103 @@
+:root {
+    --bg: #f5f7fb;
+    --card: #ffffff;
+
+    --text: #1e293b;
+    --muted: #64748b;
+
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+
+    --radius: 20px;
+
+    --shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+
+    font-family:
+        Inter,
+        system-ui,
+        sans-serif;
+
+    background: var(--bg);
+
+    color: var(--text);
+}
+
+.landing {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem;
+}
+
+.hero {
+    width: 100%;
+    max-width: 720px;
+
+    background: var(--card);
+
+    border-radius: var(--radius);
+
+    padding: 4rem;
+
+    box-shadow: var(--shadow);
+
+    text-align: center;
+}
+
+.hero h1 {
+    margin-top: 0;
+
+    font-size: 3rem;
+    line-height: 1.1;
+}
+
+.hero p {
+    margin-top: 1.5rem;
+
+    font-size: 1.2rem;
+    line-height: 1.8;
+
+    color: var(--muted);
+}
+
+.actions {
+    margin-top: 2.5rem;
+}
+
+.btn-primary {
+    display: inline-block;
+
+    background: var(--primary);
+
+    color: white;
+
+    text-decoration: none;
+
+    padding:
+        1rem
+        2rem;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+
+    transform: translateY(-2px);
+}
