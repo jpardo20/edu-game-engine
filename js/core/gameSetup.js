@@ -71,3 +71,21 @@ export function ompleTextarea(alumnesData) {
         .map(a => `${a.firstname} ${a.lastname}`)
         .join("\n");
 }
+
+
+export async function carregaAlumnesDemo() {
+
+    try {
+
+        const res = await fetch("./data/alumnes_demo.json");
+        const data = await res.json();
+
+        return data.alumnes;
+
+    } catch (err) {
+
+        console.error("Error carregant alumnes demo:", err);
+
+        return [];
+    }
+}
